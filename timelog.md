@@ -38,3 +38,4 @@
 * *1 hour* Set up github and overleaf for project
 * *0.5 hour* Created this timelog, cloned project on my PC
 * *0.5 hour* Created a wiki for the Github, added previous weeks minutes
+* *3 hours* Read literature about topic sentiment analysis
