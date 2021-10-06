@@ -36,4 +36,5 @@
 ### 6 Oct 2021
 
 * *1 hour* Set up github and overleaf for project
-* *0.5 hour* created this timelog, cloned project on my PC
+* *0.5 hour* Created this timelog, cloned project on my PC
+* *0.5 hour* Created a wiki for the Github, added previous weeks minutes
