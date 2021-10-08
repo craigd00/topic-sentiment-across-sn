@@ -39,3 +39,8 @@
 * *0.5 hour* Created this timelog, cloned project on my PC
 * *0.5 hour* Created a wiki for the Github, added previous weeks minutes
 * *3 hours* Read literature about topic sentiment analysis
+
+### 7 Oct 2021
+* *0.5 hour* Rescheduled meeting with supervisor, spoke about the research papers
+* *2 hours* Looked at potential Python libraries that could use for sentiment analysis
+* *1 hour* Found VADER, played around with it for a bit to see how it worked
