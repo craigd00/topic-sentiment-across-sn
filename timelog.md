@@ -53,3 +53,7 @@
 ### 15 Oct 2021
 * *2.5 hours* Researching Facebook Graph API, watching Youtube tutorials
 * *0.5 hour* Deciding Facebook will be practically impossible due to no public search
+* *0.5 hour* Instagram and Facebook API's both offer limited features after Cambridge Analytica
+* *0.5 hour* Created email to use for authenticating API's in this project
+* *2 hours* Using a TikTok API wrapper to see how it works, built test code using it
+* *0.5 hour* Applied for Twitter developer account as will need it eventually
