@@ -13,6 +13,7 @@
 * Follow the structure provided, grouping time by weeks.  Quantise time to the half hour.
 
 ## Week 1
+
 * Chose project
 
 ## Week 2
@@ -44,3 +45,11 @@
 * *0.5 hour* Rescheduled meeting with supervisor, spoke about the research papers
 * *2 hours* Looked at potential Python libraries that could use for sentiment analysis
 * *1 hour* Found VADER, played around with it for a bit to see how it worked
+
+## Week 4
+
+* Supervisor changed the meeting this week to the following week
+
+### 15 Oct 2021
+* *2.5 hours* Researching Facebook Graph API, watching Youtube tutorials
+* *0.5 hour* Deciding Facebook will be practically impossible due to no public search
