@@ -57,3 +57,11 @@
 * *0.5 hour* Created email to use for authenticating API's in this project
 * *2 hours* Using a TikTok API wrapper to see how it works, built test code using it
 * *0.5 hour* Applied for Twitter developer account as will need it eventually
+
+## Week 5
+
+* Meeting also pushed back further due to supervisor's research commitments
+
+### 20 Oct 2021
+* *1 hour* Watched YouTube and read articles on whether it is possible to scrape Facebook, seems like it will cause a ban for IP
+* *0.5 hour* Downloaded moodle project template and put meetings from wiki into folder on project too

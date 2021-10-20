@@ -1,18 +1,18 @@
 # Plan
 
-* PROJECT TITLE
-* YOUR NAME
-* STUDENT ID
-* SUPERVISOR NAME
+* Determining Topic Sentiment Across Social Network Platforms
+* Craig Dick
+* 2378675D
+* Supervisor: Peter Inglis
 
 Week-by-week plan for the whole project. Update this as you go along.
 
 ## Winter semester
 
-* **Week 1**
-* **Week 2**
-* **Week 3**
-* **Week 4**
+* Project chosen and assigned
+* Read literature on topic, set up Github and Overleaf
+* Add supervisor to Github and Overleaf, look at python libraries for emotion and sentiment analysis
+* Research possible APIs to work with project
 * **Week 5**
 * **Week 6**
 * **Week 7**
