@@ -65,3 +65,6 @@
 ### 20 Oct 2021
 * *1 hour* Watched YouTube and read articles on whether it is possible to scrape Facebook, seems like it will cause a ban for IP
 * *0.5 hour* Downloaded moodle project template and put meetings from wiki into folder on project too
+
+### 21 Oct 2021
+* *1 hour* Reddit seems like it has a useable API, maybe too similar to Twitter but researched articles on it
