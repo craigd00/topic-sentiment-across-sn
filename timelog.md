@@ -71,3 +71,4 @@
 
 ### 22 Oct 2021
 * *2 hours"* Tried to set up test version of Reddit API
+* *2 hours"* Set up basic version of Reddit API from tutorial, enabled it to topic search, need to figure out how to get comments from posts
