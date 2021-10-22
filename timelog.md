@@ -68,3 +68,6 @@
 
 ### 21 Oct 2021
 * *1 hour* Reddit seems like it has a useable API, maybe too similar to Twitter but researched articles on it
+
+### 22 Oct 2021
+* *2 hours"* Tried to set up test version of Reddit API
