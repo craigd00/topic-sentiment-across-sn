@@ -70,5 +70,13 @@
 * *1 hour* Reddit seems like it has a useable API, maybe too similar to Twitter but researched articles on it
 
 ### 22 Oct 2021
-* *2 hours"* Tried to set up test version of Reddit API
-* *2 hours"* Set up basic version of Reddit API from tutorial, enabled it to topic search, need to figure out how to get comments from posts
+* *2 hours* Tried to set up test version of Reddit API
+* *2 hours* Set up basic version of Reddit API from tutorial, enabled it to topic search, need to figure out how to get comments from posts
+
+## Week 6
+
+* Meeting ayschronous on teams this week
+
+### 27 Oct 2021
+* *3 hours* Figured out how to get comments from Reddit API, figured out how to get post id's 
+* ** 
