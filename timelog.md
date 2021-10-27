@@ -79,4 +79,4 @@
 
 ### 27 Oct 2021
 * *3 hours* Figured out how to get comments from Reddit API, figured out how to get post id's 
-* ** 
+* *2 hours* Tidied up Reddit code, created a smoother way in Jupyter notebook to investigate clearer
