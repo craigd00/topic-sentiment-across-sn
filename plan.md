@@ -13,8 +13,8 @@ Week-by-week plan for the whole project. Update this as you go along.
 * Read literature on topic, set up Github and Overleaf
 * Add supervisor to Github and Overleaf, look at python libraries for emotion and sentiment analysis
 * Research possible APIs to work with project
-* **Week 5**
-* **Week 6**
+* Test available APIs to see what works
+* Develop work in Reddit API, create way for Twitter API to search terms
 * **Week 7**
 * **Week 8**
 * **Week 9**
