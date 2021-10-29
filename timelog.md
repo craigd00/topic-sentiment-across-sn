@@ -83,4 +83,6 @@
 
 ### 29 Oct 2021
 * *2 hours* Added the sentiment analyser to the reddit code, obviously not trained fully yet to classify
+* *3 hours* Set up Twitter API, similar style to reddit notebook too
+* *0.5 hour* Merged feature branches for reddit and twitter into develop branch
 
