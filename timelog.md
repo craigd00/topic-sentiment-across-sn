@@ -87,3 +87,13 @@
 * *0.5 hour* Merged feature branches for reddit and twitter into develop branch
 * *1 hour* Tested and tried TikTok API again, not suitable, will not work
 
+## Week 7
+
+* Meeting on Tuesday
+
+### 2 Nov 2021
+* *0.5 hour* Discussed project progress with supervisor
+
+### 3 Nov 2021
+* *0.5 hour* Looked at Reddit API limits, if connecting through OAuth2 can make 60 requests/min
+* *0.5 hour* Trying to figure out if you can search by time period on Reddit - value t on search?
