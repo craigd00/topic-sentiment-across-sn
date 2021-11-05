@@ -19,37 +19,31 @@ headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 requests.get('https://oauth.reddit.com/api/v1/me', headers=headers)
 
 
-res = requests.get("https://oauth.reddit.com/r/all/search",
-                   headers=headers, params={'limit': '25', 'q':{'COP26'}})
+def getPostsOnTopic():
+        results = requests.get("https://oauth.reddit.com/r/all/search",
+                   headers=headers, params={'limit': '25', 'q':{'Scotrail'}})
 
-print("PRINTING SEARCH RESULTS FOR THE TOPIC: \n")
-for post in res.json()['data']['children']:
-        print(post['data']['title'])
-        post_title = post['data']['title']
-        post_id = post['data']['id']
-        print(post['data']['id'])
+        print("PRINTING SEARCH RESULTS FOR THE TOPIC: \n")
 
-        comments = comments = requests.get("https://oauth.reddit.com/r/all/comments/" + str(post_id),
+        posts = results.json()['data']['children']
+
+        for post in posts:
+                post_title = post['data']['title']
+                print(post_title)
+                post_id = post['data']['id']
+                getCommentsFromPosts(post_id)
+
+def getCommentsFromPosts(post_id):
+        comment_results = requests.get("https://oauth.reddit.com/r/all/comments/" + str(post_id),
                                 headers=headers, params={'limit': '25'})
-                                
+
         print("PRINTING COMMENT RESULTS FOR THE TOPIC: \n")
 
-        length_of_comments = len(comments.json()[1]['data']['children'])
+        comments = comment_results.json()[1]['data']['children'][:-1]   #slices last value as it is just list of id's
 
-        for comment in (comments.json()[1]['data']['children'])[:-1]:
-                print(comment['data']['body'])
+        for comment in comments:
+                comment_text = comment['data']['body']
+                print(comment_text)
 
-
-#~~ HOW TO GET COMMENTS FROM AN ARTICLE TYPE ~~#
-#comments = requests.get("https://oauth.reddit.com/r/all/comments/qcs08h", #article is the ['name']?
-                   #headers=headers, params={'limit': '25'})
-
-
-#print("PRINTING COMMENT RESULTS FOR THE TOPIC: \n")
-
-#length_of_comments = len(comments.json()[1]['data']['children'])
-
-#for comment in (comments.json()[1]['data']['children'])[:-1]:
-        #print(comment['data']['body'])
-
+results = getPostsOnTopic()
         
