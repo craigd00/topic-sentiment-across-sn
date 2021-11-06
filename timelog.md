@@ -97,3 +97,7 @@
 ### 3 Nov 2021
 * *0.5 hour* Looked at Reddit API limits, if connecting through OAuth2 can make 60 requests/min
 * *0.5 hour* Trying to figure out if you can search by time period on Reddit - value t on search?
+
+### 5 Nov 2021
+* *1 hour* Transferred twitter and reddit code from notebooks into runnable python, changed it so it only creates lists of texts instead of dictionaries
+* *2 hours* Figuring out set up of MongoDB clusters, got one created for project to test dataset
