@@ -101,3 +101,6 @@
 ### 5 Nov 2021
 * *1 hour* Transferred twitter and reddit code from notebooks into runnable python, changed it so it only creates lists of texts instead of dictionaries
 * *2 hours* Figuring out set up of MongoDB clusters, got one created for project to test dataset
+
+### 6 Nov 2021
+* *3 hours* Converted both twitter and reddit code to insert posts and tweets into a MongoDB collection, trialled it before 24 hour run tomorrow

@@ -1,18 +1,20 @@
 import tweepy
 import json
 from pymongo import MongoClient
-from datetime import datetime
+import certifi
 import time
-import sys
-
-import emoji
-import re
-
 from twittercredentials import consumer_key, consumer_secret, access_token, access_token_secret
+from mongodbcredentials import CONNECTION_STRING
+
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret )
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
+
+
+client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
+twitter_db = client.TwitterPostsNicolaSturgeon
+tweet_collection = twitter_db['SocialMediaPosts']
 
 query = "Nicola Sturgeon"  #test query at the moment to test
 
@@ -29,7 +31,7 @@ while new_tweets:
 
         try:
             if(counter < 180):  
-                new_tweets = api.search(q=query, count=count, lang="en", tweet_mode='extended', max_id=str(last_id - 1))
+                new_tweets = api.search_tweets(q=query, count=count, lang="en", tweet_mode='extended', max_id=str(last_id - 1))
          
                 if not new_tweets:
                     break
@@ -38,7 +40,7 @@ while new_tweets:
                    
                     t = json.dumps(t._json) 
                     tweet = json.loads(t)
-
+                    
                     retweet = False
 
                     if tweet['retweeted'] or tweet['full_text'].startswith('RT') == True:
@@ -51,6 +53,8 @@ while new_tweets:
 
                     if (retweet == False) and (text not in storing_tweets): #no point adding same text to list, will encourage bot tweets etc
                         storing_tweets.append(text)
+                        text = {'tweet': text}
+                        tweet_collection.insert_one(text)
                      
                 last_id = new_tweets[-1].id
             else:
@@ -58,5 +62,5 @@ while new_tweets:
                 counter = 0
                 time.sleep(15*60) 
                 
-        except tweepy.TweepError as e:
+        except tweepy.TweepyException as e:
             break

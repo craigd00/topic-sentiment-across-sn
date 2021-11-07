@@ -131,3 +131,4 @@ dmypy.json
 #CREDENTIALS
 redditcredentials.py
 twittercredentials.py
+mongodbcredentials.py
