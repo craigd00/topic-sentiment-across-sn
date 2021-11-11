@@ -104,3 +104,22 @@
 
 ### 6 Nov 2021
 * *3 hours* Converted both twitter and reddit code to insert posts and tweets into a MongoDB collection, trialled it before 24 hour run tomorrow
+
+### 7 Nov 2021
+* *2 hours* Fiddled about with code, for some reason seems to stop after a while, is there not enough tweets available about Nicola Sturgeon?
+
+## Week 8
+
+* Meeting asychronous on teams this week
+
+### 8 Nov 2021
+* *2 hours* Tried to run again but this time changed to Boris Johnson, seems to collect more data as think there is more tweets about him, twitter only looks at past 7 days
+
+### 9 Nov 2021
+* *2 hours* Trying to change the code in Twitter and Reddit so that it can run continuously, twitter runs for decent time
+* *1 hour* Made a reddit file to loop through subreddits instead of r/all, will this stop it breaking?
+
+### 10 Nov 2021
+* *2 hours* Test run on twitter worked, collected 60k docs. Reddit gets a json decode error after a while, trying to see if this is because it runs out of posts?
+* *0.5 hour* Reddit code doesn't collect enough unique posts, only 2000ish out of 20k dataset are unique and not sure why
+* *3 hours* Reddit API kept failing, found new API called Pushshift that stores reddit data, sometimes 24hr delay to saving data but for a dataset this should not be a problem, can set dates to filter from etc.
