@@ -24,82 +24,64 @@ headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 requests.get('https://oauth.reddit.com/api/v1/me', headers=headers)
 
 client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
-reddit_db = client.LastTryRedditBOJO2#RedditPostsBorisJohnsonRestart3#RedditPostsBorisJohnsonRestart2#RedditPostsBorisJohnsonRestart#RedditPostsBorisJohnson3
+reddit_db = client.RedditTitlesOnly2#RedditPostsBorisJohnsonRestart3#RedditPostsBorisJohnsonRestart2#RedditPostsBorisJohnsonRestart#RedditPostsBorisJohnson3
 reddit_collection = reddit_db['SocialMediaPosts']
 
 search_term = 'Boris Johnson'
-reddit_posts = [] #{}
 
-
-def getCommentsFromPosts(post_id, post_title, num_requests):
-        comment_results = requests.get("https://oauth.reddit.com/r/all/comments/" + str(post_id),
+def getCommentsFromPosts(post_id, post_title, subreddit):
+        print("BEFORE COMMENT RESULTS")
+        comment_results = requests.get("https://oauth.reddit.com/r/" + subreddit + "/comments/" + str(post_id),
                                 headers=headers, params={'limit': '100'})
-
+        print("AFTER COMMENT RESULTS")
         if comment_results:
-
-                num_requests += 1
-        
+                print("SET COMMENTS")
                 comments = comment_results.json()[1]['data']['children'][:-1]   #slices last value as it is just list of id's
-        
-            
-                #reddit_posts.append(post_title)
+                print("AFTER SET COMMENTS")
                 title = {'post': post_title}
+                print(title)
+
                 try:
+                        print("INSERTING TITLE TO COLLECTION")
                         reddit_collection.insert_one(title)
                 except Exception as e:
                         print(e)
        
                 for comment in comments:
+                        print("SETTING COMMENT TEXT")
                         comment_text = comment['data']['body']
                         text = {'post': comment_text}
                         print(text)
                         try:
+                                print("INSERTING COMMENT TO COLLECTION")
                                 reddit_collection.insert_one(text)
                         except Exception as e:
                                 print(e)
                                 break
-                        #reddit_posts.append(comment_text)
-                return num_requests
-
-        else:
-                return num_requests
-
-
-
-def getPostsOnTopic(num_requests):
-        results = requests.get("https://oauth.reddit.com/r/all/search", 
-                headers=headers, params={'limit': '100', 'q':{search_term}})
-
-        num_requests += 1
-
-        try:
-                posts = results.json()['data']['children']
-        except Exception as e:
-                print(e)
-                return num_requests
-
         time.sleep(2)
+                
+          
+
+
+
+def getPostsOnTopic():
+        print("BEFORE RESULTS")
+        results = requests.get("https://oauth.reddit.com/r/" + "all" + "/search", 
+                headers=headers, params={'limit': '100', 'q':{search_term}, 'sort':'new'})
+        print("AFTER RESULTS")
+
+        posts = results.json()['data']['children']
+        print("SET POSTS")
 
         for post in posts:
                 post_title = post['data']['title']
-                post_id = post['data']['id']
-                print(post_title)
-                num_requests = getCommentsFromPosts(post_id, post_title, num_requests)
-        return num_requests
+                title = {'post': post_title}
+                print(title)
+                reddit_collection.insert_one(title)
+            
+          
 
-num_requests = 0
-start_time = time.time()
+subreddits = ['ukpolitics', 'worldnews', 'unitedkingdom', 'europe', 'politics']
 
 while True:
-        #if num_requests < 60 and (start_time - time.time() < 60):
-        num_requests = getPostsOnTopic(num_requests)
-        #elif num_requests < 60 and (start_time - time.time() >= 60):
-                #start_time = time.time()
-               # num_requests = 0
-                #getPostsOnTopic(num_requests)
-       # else:
-            #    print("Maxed out requests for now")
-             #   num_requests = 0
-           #     start_time = time.time()
-            #    time.sleep(30)
-        
+        getPostsOnTopic()
