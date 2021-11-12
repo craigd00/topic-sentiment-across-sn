@@ -123,3 +123,13 @@
 * *2 hours* Test run on twitter worked, collected 60k docs. Reddit gets a json decode error after a while, trying to see if this is because it runs out of posts?
 * *0.5 hour* Reddit code doesn't collect enough unique posts, only 2000ish out of 20k dataset are unique and not sure why
 * *3 hours* Reddit API kept failing, found new API called Pushshift that stores reddit data, sometimes 24hr delay to saving data but for a dataset this should not be a problem, can set dates to filter from etc.
+
+### 11 Nov 2021
+* *2 hours* Made new code to search reddit using pushshift api
+* *1 hour* Fails sometimes when getting the results back
+* *1 hour* Think this happens if a post has since been deleted, added try except statements around the results
+* *2 hours* Created functions to be able to get comments back using a post id, already able to get all comments and post titles containing the search query
+* *1 hour* Gave it a test run, failed again so added another try except for the new functions added, will test run tomorrow
+
+### 12 Nov 2021
+* *2 hours* Left the code running, it pulled back 3k post titles containing query, 7k comments containing query, and 22k comments from titles containing query. Code did not break and successfully worked
