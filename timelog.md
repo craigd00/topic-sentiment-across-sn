@@ -133,3 +133,19 @@
 
 ### 12 Nov 2021
 * *2 hours* Left the code running, it pulled back 3k post titles containing query, 7k comments containing query, and 22k comments from titles containing query. Code did not break and successfully worked
+
+## Week 8
+
+* Meeting asychronous on teams this week as I had asked all my questions the previous week, and only had one question so was easier to message
+
+### 17 Nov 2021
+* *1 hour* Ran code on Nicola Sturgeon as a query, did not get much data but testing how much it brings back on different topics
+* *1 hour* Ran the code on Joe Biden, left running over night as twitter had lots of tweets about him
+
+### 18 Nov 2021
+* *1 hour* Ran code on Keir Starmer
+* *1 hour* Ran code on Spiderman
+
+### 19 Nov 2021
+* *1 hour* Ran code again on Boris Johnson as I couldn't change my MongoDB database names on him that I currently had, data from reddit was also over a month
+* *2 hours* Made a python notebook to analyse emotion difference solely using VADER, going to try a NLP approach next week to see if this improves the work, maybe manually classify a small dataset
