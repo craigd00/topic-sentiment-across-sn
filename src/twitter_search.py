@@ -13,7 +13,7 @@ api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
 client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
-twitter_db = client.LastTryTwitterBOJO#TwitterPostsBorisJohnson#NicolaSturgeon
+twitter_db = client.TwitterBorisJohnson
 tweet_collection = twitter_db['SocialMediaPosts']
 
 query = "Boris Johnson"  #test query at the moment to test

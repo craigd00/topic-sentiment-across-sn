@@ -7,7 +7,7 @@ import datetime
 
 
 client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
-reddit_db = client.RedditPushshiftBorisJohnsonRerun
+reddit_db = client.RedditBorisJohnson
 reddit_collection = reddit_db['SocialMediaPosts']
 
 
@@ -26,7 +26,7 @@ reddit_comments_query = []
 reddit_comments = []
 
 #https://www.geeksforgeeks.org/how-to-convert-datetime-to-unix-timestamp-in-python/
-date_from = datetime.datetime(2021, 10, 1, 00, 00) #Y/M/D/HOUR/MINS
+date_from = datetime.datetime(2021, 11, 8, 00, 00) #Y/M/D/HOUR/MINS
 timestamp = int(time.mktime(date_from.timetuple()))#"1633124765"
 
 
