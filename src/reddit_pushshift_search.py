@@ -7,11 +7,11 @@ import datetime
 
 
 client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
-reddit_db = client.RedditBorisJohnson
+reddit_db = client.RedditRestrictions
 reddit_collection = reddit_db['SocialMediaPosts']
 
 
-query="Boris Johnson"
+query="restrictions"
 
 def pushshiftSearch(search_type, date_from):
     url = f"https://api.pushshift.io/reddit/search/{search_type}/?q={query}&after={date_from}&size=100"
@@ -26,9 +26,10 @@ reddit_comments_query = []
 reddit_comments = []
 
 #https://www.geeksforgeeks.org/how-to-convert-datetime-to-unix-timestamp-in-python/
-date_from = datetime.datetime(2021, 11, 8, 00, 00) #Y/M/D/HOUR/MINS
+date_from = datetime.datetime(2021, 11, 21, 00, 00) #Y/M/D/HOUR/MINS
 timestamp = int(time.mktime(date_from.timetuple()))#"1633124765"
 
+post_ids = []
 
 def searching_reddit(search_type, filter_by):
     try:
@@ -40,14 +41,15 @@ def searching_reddit(search_type, filter_by):
         for post in posts:
             if search_type == "submission":
                 reddit_titles.append(post[filter_by])
-                getCommentsFromTitles(post['id'])
+                post_ids.append(post['id'])
+                #getCommentsFromTitles(post['id'])
                 
             else:
                 reddit_comments_query.append(post[filter_by])
-
-            reddit_post = {'post': post[filter_by]}
+            #print(post["subreddit"])
+            reddit_post = {'post': post[filter_by], 'subreddit': post["subreddit"]}
             reddit_collection.insert_one(reddit_post)
-
+           
             print(post[filter_by])
 
         time.sleep(1)   
@@ -85,7 +87,7 @@ def getCommentsFromTitles(post_id):
             comment_text = comment['body']
             print(comment_text)
             reddit_comments.append(comment_text)
-            reddit_comment = {'post': comment_text}
+            reddit_comment = {'post': comment_text, 'subreddit': comment["subreddit"]}
             reddit_collection.insert_one(reddit_comment)
             
         comment_list, comment_ids = lengthOfComments(comment_ids)
@@ -118,6 +120,13 @@ def splitListIntoStrings(comment_ids):
 
 searching_reddit(search_type = "submission", filter_by = "title")
 searching_reddit(search_type = "comment", filter_by = "body")
+
+for id in post_ids:
+    try:
+        getCommentsFromTitles(id)
+    except:
+        continue
+   
 
 print(len(reddit_titles))
 print(len(reddit_comments_query))
