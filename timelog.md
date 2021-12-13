@@ -149,3 +149,44 @@
 ### 19 Nov 2021
 * *1 hour* Ran code again on Boris Johnson as I couldn't change my MongoDB database names on him that I currently had, data from reddit was also over a month
 * *2 hours* Made a python notebook to analyse emotion difference solely using VADER, going to try a NLP approach next week to see if this improves the work, maybe manually classify a small dataset
+
+## Week 9
+
+* Meeting on Tuesday 2pm
+
+### 23 Nov 2021
+* *0.5 hour* Meeting with supervisor, scope of project changed to investigate covid topics and if sentiment analysis can identify some misinformation spreading subreddits
+
+### 25 Nov 2021
+* *2 hours* Changed code to save the subreddits from posts, and also to pull back the post id comments after it has collected terms of query
+
+### 26 Nov 2021
+* *0.5 hour*  Changed query to run for vaccines
+
+### 27 Nov 2021
+* *0.5 hour*  Changed query to run for lockdown
+
+### 28 Nov 2021
+* *0.5 hour*  Changed query to run for PCR
+* *0.5 hour*  Changed query to run for facemasks
+
+## Week 10
+
+* Meeting asynchronous this week - Progress stunted a bit this week due to amount of coursework
+
+### 29 Nov 2021
+* *2 hours* Ran code on queries Pfizer and quarantine
+
+### 30 Nov 2021
+* *0.5 hour* Ran code on restrictions
+
+## Week 11
+
+* Supervisor had MSc project readings and I had exams and deadlines, so was not able to meet
+
+## Week 12
+
+* Meeting on Tuesday 14th
+
+### 13 Dec 2021
+* *2 hours* Ran code on queries Pfizer and quarantine
