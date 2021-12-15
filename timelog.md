@@ -186,7 +186,14 @@
 
 ## Week 12
 
-* Meeting on Tuesday 14th
+* Meeting on Tuesday 14th has been pushed to following week
 
 ### 13 Dec 2021
-* *2 hours* Ran code on queries Pfizer and quarantine
+* *2 hours* Created functions to return the top subreddits from one of the search queries
+* *2 hours* Code to investigate the sentiment of each of the posts and save the subreddit with it
+* *1 hour* Plotting the sentiment amongst subreddits by their search query
+* *0.5 hour* Plotting the topics against eachother in reddit
+* *0.5 hour* Finding the overlap amongst subreddits between the queries
+
+### 15 Dec 2021
+* *2 hours* Code for the analysis on the twitter data, plotted graphs on the terms
