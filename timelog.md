@@ -197,3 +197,6 @@
 
 ### 15 Dec 2021
 * *2 hours* Code for the analysis on the twitter data, plotted graphs on the terms
+
+### 20 Dec 2021
+* *1 hour* Changed the reddit code to view percentages as a comparison
