@@ -198,5 +198,71 @@
 ### 15 Dec 2021
 * *2 hours* Code for the analysis on the twitter data, plotted graphs on the terms
 
+## Christmas Break
+
+* Any work complete over the holidays up till Semester 2 resumes, meeting with superviosr on the 21st
+
 ### 20 Dec 2021
 * *1 hour* Changed the reddit code to view percentages as a comparison
+
+### 21 Dec 2021
+* *0.5 hour* Supervisor meeting, going to look at running the search terms again to gather perception over different time periods
+
+### 3 Jan 2021
+* *0.5 hour* MongoDB cluster ran out of space when trying to run again
+
+### 6 Jan 2021
+* *0.5 hour* Fixed MongoDB problem by creating new project cluster to store data to, if could do over again would have each topic as a cluster rather than each time frame
+* *0.5 hour* Ran the code for "vaccine" again
+
+### 9 Jan 2021
+* *0.5 hour* Ran on vaccine - last time forgot to change date in reddit code so cluster got too full 
+
+## Semester 2 
+
+
+## Week 1
+
+* No meeting yet as supervisor will get in contact with me when he knows day he is free
+
+### 10 Jan 2021
+* *0.5 hour* Ran on lockdown 
+
+### 10 Jan 2021
+* *0.5 hour* Ran on PCR 
+
+### 10 Jan 2021
+* *0.5 hour* Ran on facemasks 
+
+### 11 Jan 2021 
+* *0.5 hour* Ran on Pfizer
+* *0.5 hour* Ran on quarantine
+
+### 12 Jan 2021 
+* *0.5 hour* Computer update had changed IP for MongoDB so had to add current
+* *0.5 hour* Ran on restrictions
+* *0.5 hour* Ran on booster
+
+## Week 2
+
+### 17 Jan 2021
+* *1 hour* Created new cluster for the third runs, ran the code on vaccine
+
+### 19 Jan 2021
+* *0.5 hour* Ran on lockdown
+
+### 20 Jan 2021
+* *0.5 hour* Ran on PCR
+* *0.5 hour* Ran on facemasks
+
+### 21 Jan 2021
+* *0.5 hour* Ran on Pfizer
+
+### 23 Jan 2021
+* *0.5 hour* Ran on quarantine
+
+## Week 3
+
+### 24 Jan 2021
+* *0.5 hour* Ran on restrictions
+* *0.5 hour* Ran on booster
