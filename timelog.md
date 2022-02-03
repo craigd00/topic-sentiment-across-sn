@@ -245,6 +245,8 @@
 
 ## Week 2
 
+* Supervisor contacted to arrange meeting for following week
+
 ### 17 Jan 2021
 * *1 hour* Created new cluster for the third runs, ran the code on vaccine
 
@@ -263,6 +265,21 @@
 
 ## Week 3
 
+* Supervisor meeting on the 25th 
+
 ### 24 Jan 2021
 * *0.5 hour* Ran on restrictions
 * *0.5 hour* Ran on booster
+
+### 25 Jan 2021
+* *0.5 hour* Meeting with supervisor on progress, potential of trying to use a classifier to evaluate or VADER v Other sentiment analysis libraries
+
+## Week 4
+
+* Supervisor meeting on the 1st 
+
+### 31 Jan 2021
+* *2 hours* Read and collected literature of VADER, NLP and sentiment analysis
+* *1 hour* Modularised code used in the jupyter notebooks for analysis
+* *2 hours* Produced graphics of Reddit and Twitter terms using TextBlob instead of VADER for comparison
+* *1 hour* Made graphs of all runs of Reddit and Twitter
