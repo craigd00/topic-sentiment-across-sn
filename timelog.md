@@ -208,14 +208,14 @@
 ### 21 Dec 2021
 * *0.5 hour* Supervisor meeting, going to look at running the search terms again to gather perception over different time periods
 
-### 3 Jan 2021
+### 3 Jan 2022
 * *0.5 hour* MongoDB cluster ran out of space when trying to run again
 
-### 6 Jan 2021
+### 6 Jan 2022
 * *0.5 hour* Fixed MongoDB problem by creating new project cluster to store data to, if could do over again would have each topic as a cluster rather than each time frame
 * *0.5 hour* Ran the code for "vaccine" again
 
-### 9 Jan 2021
+### 9 Jan 2022
 * *0.5 hour* Ran on vaccine - last time forgot to change date in reddit code so cluster got too full 
 
 ## Semester 2 
@@ -225,20 +225,20 @@
 
 * No meeting yet as supervisor will get in contact with me when he knows day he is free
 
-### 10 Jan 2021
+### 10 Jan 2022
 * *0.5 hour* Ran on lockdown 
 
-### 10 Jan 2021
+### 10 Jan 2022
 * *0.5 hour* Ran on PCR 
 
-### 10 Jan 2021
+### 10 Jan 2022
 * *0.5 hour* Ran on facemasks 
 
-### 11 Jan 2021 
+### 11 Jan 2022
 * *0.5 hour* Ran on Pfizer
 * *0.5 hour* Ran on quarantine
 
-### 12 Jan 2021 
+### 12 Jan 2022 
 * *0.5 hour* Computer update had changed IP for MongoDB so had to add current
 * *0.5 hour* Ran on restrictions
 * *0.5 hour* Ran on booster
@@ -247,39 +247,48 @@
 
 * Supervisor contacted to arrange meeting for following week
 
-### 17 Jan 2021
+### 17 Jan 2022
 * *1 hour* Created new cluster for the third runs, ran the code on vaccine
 
-### 19 Jan 2021
+### 19 Jan 2022
 * *0.5 hour* Ran on lockdown
 
-### 20 Jan 2021
+### 20 Jan 2022
 * *0.5 hour* Ran on PCR
 * *0.5 hour* Ran on facemasks
 
-### 21 Jan 2021
+### 21 Jan 2022
 * *0.5 hour* Ran on Pfizer
 
-### 23 Jan 2021
+### 23 Jan 2022
 * *0.5 hour* Ran on quarantine
 
 ## Week 3
 
 * Supervisor meeting on the 25th 
 
-### 24 Jan 2021
+### 24 Jan 2022
 * *0.5 hour* Ran on restrictions
 * *0.5 hour* Ran on booster
 
-### 25 Jan 2021
+### 25 Jan 2022
 * *0.5 hour* Meeting with supervisor on progress, potential of trying to use a classifier to evaluate or VADER v Other sentiment analysis libraries
+
+### 26 Jan 2022
+* *1 hour* Wrote up meeting minutes from previous meetings that I had not wrote up yet
 
 ## Week 4
 
 * Supervisor meeting on the 1st 
 
-### 31 Jan 2021
+### 31 Jan 2022
 * *2 hours* Read and collected literature of VADER, NLP and sentiment analysis
 * *1 hour* Modularised code used in the jupyter notebooks for analysis
 * *2 hours* Produced graphics of Reddit and Twitter terms using TextBlob instead of VADER for comparison
 * *1 hour* Made graphs of all runs of Reddit and Twitter
+
+### 1 Feb 2022
+* *0.5 hour* Meeting with supervisor
+
+### 3 Feb 2022
+* *1 hour* Adding issues to GitHub, updating project boards, committing changes
