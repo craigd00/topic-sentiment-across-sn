@@ -292,3 +292,12 @@
 
 ### 3 Feb 2022
 * *1 hour* Adding issues to GitHub, updating project boards, committing changes
+
+## Week 5
+
+* Asynchronous meeting on Teams due to supervisor's commitments
+
+### 7 Feb 2022
+* *1 hour* Researched Flair as a sentiment analysis tool
+* *2 hours* Implemented and tested Flair, created code to run it on databases
+* *1 hour* Tried to run on database, kept crashing at the lockdown database so will not be suitable for project
