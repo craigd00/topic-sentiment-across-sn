@@ -196,3 +196,26 @@ def database_as_flair(db, classifier):
 
         list_of_dicts += [empty]
     return list_of_dicts
+
+
+def database_as_afinn(db, analyzer):
+    list_of_dicts = []
+
+    for entry in db.SocialMediaPosts.find():
+        empty = {}
+        empty['post'] = entry['post']
+        empty['subreddit'] = entry['subreddit']
+
+        polarity = analyzer.score(entry['post'])
+  
+        if (polarity > 0):
+            empty['sentiment'] = 'positive'
+
+        elif (polarity < 0):
+            empty['sentiment'] = 'negative'
+
+        else:
+            empty['sentiment'] = 'neutral'
+
+        list_of_dicts += [empty]
+    return list_of_dicts
