@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from textblob import TextBlob
+from flair.data import Sentence
 
 def get_mostcommon_posts(db):
     top_tweets = db.SocialMediaPosts.aggregate([
@@ -103,6 +104,27 @@ def database_as_textblob(db):
 
         else:
             empty['sentiment'] = 'neutral'
+
+        list_of_dicts += [empty]
+    return list_of_dicts
+
+
+def database_as_flair(db, classifier):
+    list_of_dicts = []
+
+    for entry in db.SocialMediaPosts.find():
+        empty = {}
+        empty['tweet'] = entry['tweet']
+
+        text = Sentence(entry['tweet'])
+        classifier.predict(text)
+        polarity = text.labels[0].value
+
+        if (polarity == "POSITIVE"):
+            empty['sentiment'] = 'positive'
+
+        else:
+            empty['sentiment'] = 'negative'
 
         list_of_dicts += [empty]
     return list_of_dicts
