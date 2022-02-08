@@ -301,3 +301,5 @@
 * *1 hour* Researched Flair as a sentiment analysis tool
 * *2 hours* Implemented and tested Flair, created code to run it on databases
 * *1 hour* Tried to run on database, kept crashing at the lockdown database so will not be suitable for project
+* *1 hour* Researched Afinn, another sentiment analysis library
+* *1 hour* Implemented code to run it on the databases, and produced graphics again for each run
