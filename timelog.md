@@ -303,3 +303,28 @@
 * *1 hour* Tried to run on database, kept crashing at the lockdown database so will not be suitable for project
 * *1 hour* Researched Afinn, another sentiment analysis library
 * *1 hour* Implemented code to run it on the databases, and produced graphics again for each run
+
+### 8 Feb 2022
+* *0.5 hour* Asynchronous teams meeting, left all details of my progress
+
+### 13 Feb 2022
+* *1 hour* Researched BERT for text classification, looked at previous work
+* *1 hour* Looked into the hugging face transformers library for BERT models, provides high scale models for text classification
+* *1 hour* During research, some models won't be applicable as lots do not include neutral sentiment
+
+## Week 6
+
+* Meeting on the 15th
+
+### 14 Feb 2022
+* *1 hour* Tested out a couple of different models, settled on twitter-roberta-base-sentiment, seems to have very good accuracy for social media posts, 7 million downloads last month
+* *2 hours* Ran it on the code structure I have been using for other sentiments, breaks connection as it runs for too long, need to find a way to speed up
+
+### 15 Feb 2022
+* *1 hour* Restructured code, got the data from MongoDB first before passing it into BERT rather than at the same time, still taking a while to run but looks like it might work
+* *0.5 hour* Meeting with supervisor
+* *1 hour* Left notebook running overnight
+
+### 16 Feb 2022
+* *1 hour* Notebook failed overnight on last database due to getting over 512 characters which is BERTs limit, made a function to remove usernames as this was the reason with loads of @'s, and did not provide usefulness to sentiment
+* *1 hour* Changed the dictionaries into dataframes as easier to apply the functions to this
