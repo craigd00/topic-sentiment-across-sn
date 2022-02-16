@@ -326,5 +326,6 @@
 * *1 hour* Left notebook running overnight
 
 ### 16 Feb 2022
+* *1 hour* Changed model to tensorflow to see if that improves time, it made it longer
 * *1 hour* Notebook failed overnight on last database due to getting over 512 characters which is BERTs limit, made a function to remove usernames as this was the reason with loads of @'s, and did not provide usefulness to sentiment
 * *1 hour* Changed the dictionaries into dataframes as easier to apply the functions to this
