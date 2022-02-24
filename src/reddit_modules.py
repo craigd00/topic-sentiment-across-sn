@@ -2,6 +2,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 from textblob import TextBlob
 from flair.data import Sentence
+from scipy.special import softmax
+import urllib.request
+import csv
+import numpy as np
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import emoji
+import re
+
 
 def get_top_subreddits(db):
     top_subreddits = db.SocialMediaPosts.aggregate([
@@ -219,3 +227,50 @@ def database_as_afinn(db, analyzer):
 
         list_of_dicts += [empty]
     return list_of_dicts
+
+
+labels=[]
+mapping_link = f"https://raw.githubusercontent.com/cardiffnlp/tweeteval/main/datasets/sentiment/mapping.txt"
+with urllib.request.urlopen(mapping_link) as f:
+    html = f.read().decode('utf-8').split("\n")
+    csvreader = csv.reader(html, delimiter='\t')
+labels = [row[1] for row in csvreader if len(row) > 1]
+
+
+model = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment")
+tokenizer = AutoTokenizer.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment", model_max_length=512, padding_side="right")
+    
+model.save_pretrained("cardiffnlp/twitter-roberta-base-sentiment")
+tokenizer.save_pretrained("cardiffnlp/twitter-roberta-base-sentiment", model_max_length=512, padding_side="right")
+
+
+def process_emoji(text):
+    new_text = re.sub(emoji.get_emoji_regexp(), r"", text)
+    return new_text
+
+
+def bert_preprocess(tweet):
+    new_tweet = []
+    for t in tweet.split(" "):
+        t = 'http' if t.startswith('http') else t
+        new_tweet.append(t)
+   
+    return " ".join(new_tweet)
+
+
+def database_as_bert(df):
+    for t in df:
+        try:
+            t = bert_preprocess(t)
+            encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
+            output = model(**encoded_input)
+        except:
+            t = process_emoji(t)
+            encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
+            output = model(**encoded_input)
+        finally:
+            scores = output[0][0].detach().numpy()
+            scores = softmax(scores)
+            ranking = np.argsort(scores)
+            ranking = ranking[::-1]
+            df["sentiment"] = labels[ranking[0]]
