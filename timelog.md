@@ -329,3 +329,31 @@
 * *1 hour* Changed model to tensorflow to see if that improves time, it made it longer
 * *1 hour* Notebook failed overnight on last database due to getting over 512 characters which is BERTs limit, made a function to remove usernames as this was the reason with loads of @'s, and did not provide usefulness to sentiment
 * *1 hour* Changed the dictionaries into dataframes as easier to apply the functions to this
+* *1 hour* Setup the code again and left running overnight
+
+### 17 Feb 2022
+* *1 hour* Failed overnight again, not sure why because I had filtered out the >512 characters, going to introduce padding side and max length into tokenizer
+
+## Week 7
+
+* Meeting on the 22nd
+
+### 21 Feb 2022
+* *4 hours* Debugging code to find out where the bert model was failing at, took a while to run and split into lists to finally figure out what was happening
+* *1 hour* It was an emoji the system didn't recognise causing it to fail, introduced a try catch finally to stop this interfering, if there is an exception it will now use the emoji function to remove an emoji - hopefully this will be only thing that will cause errors
+* *1 hour* Ran the code again and left running overnight
+
+### 22 Feb 2022
+* *0.5 hour* Meeting with supervisor
+* *1 hour* Graphics were finally produced with bert, classifies a lot of negative posts compared to other models
+
+### 23 Feb 2022
+* *1 hour* Fixed BERT model to deal with text > 512, by setting max length in the tokenizer
+* *2 hours* Filtered out terms in Reddit dataset that did not contain the search query for first database
+* *1 hour* MongoDB error as kept timing out getting a CursorNotFound, changed db into dictionary then put through function to remove from db if term not included
+* *0.5 hour* Wrote abstract for dissertation
+* *1 hour* Wrote out limitations of project
+* *1 hour* Planned out stuff still to finish with dissertation code
+
+### 24 Feb 2022
+* *1 hour* Filtered out the terms in databases 2 and 3 for reddit that did not contain the search term - some variable in pushshift can search self text only instead of title
