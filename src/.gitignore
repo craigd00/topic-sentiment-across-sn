@@ -135,3 +135,4 @@ mongodbcredentials.py
 
 #BERT model
 cardiffnlp\twitter-roberta-base-sentiment
+test_trainer\runs
