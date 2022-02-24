@@ -357,3 +357,4 @@
 
 ### 24 Feb 2022
 * *1 hour* Filtered out the terms in databases 2 and 3 for reddit that did not contain the search term - some variable in pushshift can search self text only instead of title
+* *0.5 hour* Committed work that had been changed to github
