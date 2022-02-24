@@ -132,3 +132,6 @@ dmypy.json
 redditcredentials.py
 twittercredentials.py
 mongodbcredentials.py
+
+#BERT model
+cardiffnlp\twitter-roberta-base-sentiment
