@@ -1,17 +1,16 @@
 import requests
-from mongodbcredentials import CONNECTION_STRING
+from mongodbcredentials import CONNECTION_STRING, CONNECTION_STRING_JAN_A, CONNECTION_STRING_JAN_1, CONNECTION_STRING_JAN_2, CONNECTION_STRING_TRAINING_DATA
 from pymongo import MongoClient
 import certifi
 import time
 import datetime
 
 
-client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
-reddit_db = client.RedditRestrictions
-reddit_collection = reddit_db['SocialMediaPosts']
+client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())
+reddit_db = client.TrainValTestReddit
+reddit_collection = reddit_db['TrainingValidationTest']
 
-
-query="restrictions"
+query = "coronavirus"
 
 def pushshiftSearch(search_type, date_from):
     url = f"https://api.pushshift.io/reddit/search/{search_type}/?q={query}&after={date_from}&size=100"
@@ -26,7 +25,7 @@ reddit_comments_query = []
 reddit_comments = []
 
 #https://www.geeksforgeeks.org/how-to-convert-datetime-to-unix-timestamp-in-python/
-date_from = datetime.datetime(2021, 11, 21, 00, 00) #Y/M/D/HOUR/MINS
+date_from = datetime.datetime(2022, 2, 6, 00, 00) #Y/M/D/HOUR/MINS
 timestamp = int(time.mktime(date_from.timetuple()))#"1633124765"
 
 post_ids = []
