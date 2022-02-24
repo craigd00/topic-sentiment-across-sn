@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import certifi
 import time
 from twittercredentials import consumer_key, consumer_secret, access_token, access_token_secret
-from mongodbcredentials import CONNECTION_STRING
+from mongodbcredentials import CONNECTION_STRING, CONNECTION_STRING_JAN_A, CONNECTION_STRING_JAN_1, CONNECTION_STRING_JAN_2, CONNECTION_STRING_TRAINING_DATA
 import datetime
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret )
@@ -12,11 +12,11 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
-client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
-twitter_db = client.TwitterBorisJohnson
-tweet_collection = twitter_db['SocialMediaPosts']
+client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())
+twitter_db = client.TrainValTestTwitter
+tweet_collection = twitter_db['TrainingValidationTest']
 
-query = "Boris Johnson"  #test query at the moment to test
+query = "coronavirus"  #test query at the moment to test
 
 count = 100 # number of tweets to grab in one go
 
