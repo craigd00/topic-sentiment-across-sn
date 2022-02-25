@@ -262,7 +262,7 @@ def database_as_bert(df):
     for t in df:
         try:
             t = bert_preprocess(t)
-            encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
+            encoded_input = tokenizer(t, return_tensors='pt')
             output = model(**encoded_input)
         except:
             t = process_emoji(t)
@@ -274,3 +274,5 @@ def database_as_bert(df):
             ranking = np.argsort(scores)
             ranking = ranking[::-1]
             df["sentiment"] = labels[ranking[0]]
+    
+    return df

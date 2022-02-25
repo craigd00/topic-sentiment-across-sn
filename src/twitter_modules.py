@@ -9,7 +9,7 @@ import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import emoji
 import re
-
+import pandas as pd
 
 def get_mostcommon_posts(db):
     top_tweets = db.SocialMediaPosts.aggregate([
@@ -79,7 +79,8 @@ def pos_neg_count(dictionary):
     return total_sentiment
 
 
-def plot_topics(list_of_topics, data_points):
+def plot_topics(data_points):
+    list_of_topics = ['Facemasks', 'Lockdown', 'PCR', 'Pfizer', 'Quarantine', 'Restrictions', 'Vaccine']
     fig = plt.figure()
     x_point = np.arange(7)
     fig = plt.figure(figsize=(18, 10))
@@ -168,7 +169,9 @@ def database_as_tweet(db):
         empty['tweet'] = entry['tweet']
 
         list_of_dicts += [empty]
-    return list_of_dicts
+
+    dataframe = pd.DataFrame(list_of_dicts, columns=['tweet'])
+    return dataframe
 
 
 def bert_preprocess(tweet):
@@ -210,7 +213,7 @@ def database_as_bert(df):
             output = model(**encoded_input)
         except:
             t = process_emoji(t)
-            encoded_input = tokenizer(t, return_tensors='pt')
+            encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
             output = model(**encoded_input)
         finally:
             scores = output[0][0].detach().numpy()
@@ -223,25 +226,28 @@ def database_as_bert(df):
 
 
 def positive_neg_count_df(df):
-    total_sentiment = {}
-    total_sentiment['positive'] = 0
-    total_sentiment['negative'] = 0
-    total_sentiment['neutral'] = 0
-    num_of_posts = 0
+    positive = df[df["sentiment"]=="positive"].count()["sentiment"]
+    negative = df[df["sentiment"]=="negative"].count()["sentiment"]
+    neutral = df[df["sentiment"]=="neutral"].count()["sentiment"]
+
+    pos_perc = (positive/len(df)) * 100
+    neg_perc = (negative/len(df)) * 100
+    neu_perc = (neutral/len(df)) * 100
+
+    sentiment_percent = {"pos_perc": pos_perc, "neg_perc": neg_perc, "neu_perc": neu_perc}
+    return sentiment_percent
+
+
+def sentiment_dpts(f_sent, l_sent, pcr_sent, pf_sent, q_sent, r_sent, v_sent):
     
-    for index, row in df.iterrows():
-        num_of_posts += 1
-        if row['sentiment'] == 'positive':
-            total_sentiment['positive'] += 1
+    query_dpts = []
+    positive = []
+    negative = []
+    neutral = []
 
-        elif row['sentiment'] == 'negative':
-            total_sentiment['negative'] += 1
+    for sentiment in f_sent, l_sent, pcr_sent, pf_sent, q_sent, r_sent, v_sent:
+        positive += [sentiment['pos_perc']]
+        negative += [sentiment['neg_perc']]
+        neutral += [sentiment['neu_perc']]
 
-        else:
-            total_sentiment['neutral'] += 1
-
-    total_sentiment['pos_perc'] = (total_sentiment['positive']/num_of_posts) * 100
-    total_sentiment['neg_perc'] = (total_sentiment['negative']/num_of_posts) * 100
-    total_sentiment['neu_perc'] = (total_sentiment['neutral']/num_of_posts) * 100
-    
-    return total_sentiment
+    query_dpts += [positive, negative, neutral]
