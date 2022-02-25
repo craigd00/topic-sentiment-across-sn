@@ -358,3 +358,7 @@
 ### 24 Feb 2022
 * *1 hour* Filtered out the terms in databases 2 and 3 for reddit that did not contain the search term - some variable in pushshift can search self text only instead of title
 * *0.5 hour* Committed work that had been changed to github
+
+### 25 Feb 2022
+* *0.5 hour* Code finished running on run 2 for twitter, inspected graph and ran for 3
+* *1 hour* Changed about code in modules to streamline better and for fair experimentation, all in dataframes
