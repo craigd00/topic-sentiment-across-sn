@@ -5,7 +5,6 @@ from flair.data import Sentence
 from scipy.special import softmax
 import urllib.request
 import csv
-import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import emoji
 import re
@@ -129,10 +128,11 @@ def top_subr_counts(counts, sentiments):
     return subreddits, data_points
 
 
-def plot_sentiment_top10(title, subreddits, data_points):
+def plot_sentiment_top10(title, subreddits, data_points, filename):
     fig = plt.figure()
     x_point = np.arange(10)
     fig = plt.figure(figsize=(18, 8))
+
     ax = fig.add_axes([0,0,1,1])
     ax.bar(x_point + 0.00, data_points[0], color = 'g', width = 0.25)
     ax.bar(x_point + 0.25, data_points[1], color = 'r', width = 0.25)
@@ -140,12 +140,14 @@ def plot_sentiment_top10(title, subreddits, data_points):
     ax.set_ylabel('Percentage of posts (%)', fontweight='bold', fontsize=16)
     ax.set_xlabel('Subreddit name', fontweight='bold', fontsize=16)
     ax.set_title("Sentiment amongst top 10 " + title + " subreddits", fontweight='bold', fontsize=20)
+    
     plt.xticks(x_point + 0.25, subreddits)
-
     ax.legend(labels=['Positive', 'Negative', 'Neutral'])
+    plt.savefig(filename)
 
 
 def plot_topics(list_of_topics, data_points):
+    list_of_topics = ['Facemasks', 'Lockdown', 'PCR', 'Pfizer', 'Quarantine', 'Restrictions', 'Vaccine']
     fig = plt.figure()
     x_point = np.arange(7)
     fig = plt.figure(figsize=(18, 10))
@@ -231,9 +233,11 @@ def database_as_afinn(db, analyzer):
 
 labels=[]
 mapping_link = f"https://raw.githubusercontent.com/cardiffnlp/tweeteval/main/datasets/sentiment/mapping.txt"
+
 with urllib.request.urlopen(mapping_link) as f:
     html = f.read().decode('utf-8').split("\n")
     csvreader = csv.reader(html, delimiter='\t')
+
 labels = [row[1] for row in csvreader if len(row) > 1]
 
 
@@ -256,21 +260,3 @@ def bert_preprocess(tweet):
         new_tweet.append(t)
    
     return " ".join(new_tweet)
-
-
-def database_as_bert(df):
-    for t in df:
-        try:
-            t = bert_preprocess(t)
-            encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
-            output = model(**encoded_input)
-        except:
-            t = process_emoji(t)
-            encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
-            output = model(**encoded_input)
-        finally:
-            scores = output[0][0].detach().numpy()
-            scores = softmax(scores)
-            ranking = np.argsort(scores)
-            ranking = ranking[::-1]
-            df["sentiment"] = labels[ranking[0]]
