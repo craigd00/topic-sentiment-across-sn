@@ -31,7 +31,6 @@ tokenizer.save_pretrained("cardiffnlp/twitter-roberta-base-sentiment", model_max
 #Start of functions 
 
 #Function for turning posts into a dataframe
-
 def database_as_tweet(db, type):
     list_of_dicts = []
 
