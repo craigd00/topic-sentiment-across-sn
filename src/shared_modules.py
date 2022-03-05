@@ -150,26 +150,26 @@ def process_emoji(text):
 
 # Calculates the sentiment from the model from the hugging face transformer library
 
-def database_as_bert(df):
-    for t in df:
-        try:
-            t = bert_preprocess(t)
-            encoded_input = tokenizer(t, return_tensors='pt')
-            output = model(**encoded_input)
+def database_as_bert(post):
 
-        except:
-            t = process_emoji(t)
-            encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
-            output = model(**encoded_input)
+    try:
+        t = bert_preprocess(post)
+        encoded_input = tokenizer(t, return_tensors='pt')
+        output = model(**encoded_input)
 
-        finally:
-            scores = output[0][0].detach().numpy()
-            scores = softmax(scores)
-            ranking = np.argsort(scores)
-            ranking = ranking[::-1]
-            df["sentiment"] = labels[ranking[0]]
+    except:
+        t = process_emoji(t)
+        encoded_input = tokenizer(t, max_length=512, truncation=True, return_tensors='pt')
+        output = model(**encoded_input)
 
-    return df
+    finally:
+        scores = output[0][0].detach().numpy()
+        scores = softmax(scores)
+        ranking = np.argsort(scores)
+        ranking = ranking[::-1]
+        sentiment = labels[ranking[0]]
+
+    return sentiment
 
 
 # Functions for plotting graphics
