@@ -357,3 +357,33 @@
 
 ### 24 Feb 2022
 * *1 hour* Filtered out the terms in databases 2 and 3 for reddit that did not contain the search term - some variable in pushshift can search self text only instead of title
+* *0.5 hour* Committed work that had been changed to github
+
+### 25 Feb 2022
+* *0.5 hour* Code finished running on run 2 for twitter, inspected graph and ran for 3
+* *1 hour* Changed about code in modules to streamline better and for fair experimentation, all in dataframes
+
+### 26 Feb 2022
+* *0.5 hour* Inspected graph for run 3
+* *0.5 hour* Added in dill to save my variables to a file, save fig to the graphs, and a time variable to track how long it takes to run each database
+* *1 hour* Rewrote a shared modules function and wrote a notebook for all bert runs to stop having so many notebooks, ran this but will take a while
+* *1 hour* Reviewed dissertations from hall of fame and the lecture from January
+* *2 hours* Wrote introduction for dissertation
+
+### 27 Feb 2022
+* *1 hour* Started planning background section, going to split categories into two of a bit of background about stuff being used in project, and then mini literature reviews on different parts of the problem
+* *3 hours* Wrote first part of background, researched different ways of collecting data as well as short background of NLP and sentiment analysis
+* *2 hours* Wrote about data collection of twitter and reddit on related work, this is relevant to project as it is the two social networks this involves
+
+## Week 9
+
+* Meeting on the 1st
+
+### 28 Feb 2022
+* *3 hours* Wrote about previous work to do with sentiment analysis with Python libraries
+* *3 hours* Wrote about previous work to do with COVID-19 and sentiment analysis
+
+### 2 Mar 2022
+* *1 hour* Made functions for VADER, Afinn and TextBlob to use data frames as the previous were to do with taking in a list of dictionaries
+* *2 hours* Made notebooks for twitter afinn, textblob and vader to produce for all three runs, ready to execute once bert finished running
+
