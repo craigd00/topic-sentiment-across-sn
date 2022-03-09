@@ -404,6 +404,7 @@
 
 ### 9 Mar 2022
 * *0.5 hour* Saved variables and graphs to folder
-
+* *0.5 hour* Merged develop branch with the twitter and reddit notebooks into main
+* *0.5 hour* Tidied up code, moving graph images into folders and deleting unnecessary notebooks
 
 
