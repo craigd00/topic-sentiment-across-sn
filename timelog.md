@@ -386,4 +386,24 @@
 ### 2 Mar 2022
 * *1 hour* Made functions for VADER, Afinn and TextBlob to use data frames as the previous were to do with taking in a list of dictionaries
 * *2 hours* Made notebooks for twitter afinn, textblob and vader to produce for all three runs, ready to execute once bert finished running
+* *0.5 hour* Left VADER etc running overnight
+
+### 3 Mar 2022
+* *1 hour* GitHub commit broke as the dill variables were too large to push
+
+### 5 Mar 2022
+* *1 hour* Reverted commits and deleted the dill variables from repo, pushed to develop branch
+* *0.5 hour* Created new reddit analysis feature branch to run all sentiments for reddit, only analysing sentiment at this point but saving the variables for subreddit analysis, changed bert module to take in text
+
+### 6 Mar 2022
+* *1 hour* Made reddit bert notebook, ran this over weekend
+
+### 8 Mar 2022
+* *0.5 hour* Saved variables and graphs to folder from BERT
+* *1 hour* Made notebooks for Afinn, VADER and TextBlob for reddit for all runs and ran this overnight
+
+### 9 Mar 2022
+* *0.5 hour* Saved variables and graphs to folder
+
+
 
