@@ -156,3 +156,6 @@ twitter_textblob_run3
 twitter_vader_run1
 twitter_vader_run2
 twitter_vader_run3
+
+#CSV potential train and test files
+csv_test_files
