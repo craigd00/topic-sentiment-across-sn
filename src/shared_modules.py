@@ -11,6 +11,7 @@ import re
 from scipy.special import softmax
 import urllib.request
 import csv
+from wordcloud import WordCloud, STOPWORDS
 
 # Variables for BERT model to load
 labels=[]
@@ -207,3 +208,13 @@ def sentiment_dpts(f_sent, l_sent, pcr_sent, pf_sent, q_sent, r_sent, v_sent):
 
     query_dpts += [positive, negative, neutral]
     return query_dpts
+
+
+#---------- RETURN WORD CLOUDS ----------#
+
+def wordcloud_image(library, sn, topic, sent, terms):
+    stopwords = set(STOPWORDS)
+    stopwords.update(["https", "t", "co", "amp"])
+
+    wordcloud = WordCloud(stopwords=stopwords, max_words=100, background_color="white").generate(terms)
+    wordcloud.to_file("wordclouds/" + library + "/" + sn + "/" + topic + "/" + sent + "_wordcloud.png")
