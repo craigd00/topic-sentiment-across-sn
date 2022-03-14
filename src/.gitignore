@@ -144,18 +144,8 @@ tokenizer.json
 vocab.json
 
 #var files
-twitter_afinn_run1
-twitter_afinn_run2
-twitter_afinn_run1
-twitter_bert_run1
-twitter_bert_run2
-twitter_bert_run3
-twitter_textblob_run1
-twitter_textblob_run2
-twitter_textblob_run3
-twitter_vader_run1
-twitter_vader_run2
-twitter_vader_run3
+twitter_vars/
+reddit_vars/
 
 #CSV potential train and test files
 csv_test_files
