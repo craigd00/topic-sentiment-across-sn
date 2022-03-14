@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from textblob import TextBlob
-from flair.data import Sentence
 from scipy.special import softmax
 import urllib.request
 import csv
@@ -260,3 +259,10 @@ def bert_preprocess(tweet):
         new_tweet.append(t)
    
     return " ".join(new_tweet)
+
+
+
+#---------- WORD CLOUDS ----------#
+def reddit_wordcloud_terms(df, sentiment):
+    wordcloud_terms = " ".join(post for post in df[df["sentiment"]==sentiment].post.astype(str))
+    return wordcloud_terms
