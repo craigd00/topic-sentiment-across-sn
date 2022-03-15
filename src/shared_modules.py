@@ -12,6 +12,8 @@ from scipy.special import softmax
 import urllib.request
 import csv
 from wordcloud import WordCloud, STOPWORDS
+import dill
+from dill import dump, load
 
 # Variables for BERT model to load
 labels=[]
@@ -218,3 +220,36 @@ def wordcloud_image(library, sn, topic, sent, terms):
 
     wordcloud = WordCloud(stopwords=stopwords, max_words=100, background_color="white").generate(terms)
     wordcloud.to_file("wordclouds/" + library + "/" + sn + "/" + topic + "/" + sent + "_wordcloud.png")
+
+
+#---------- RETURN WORD CLOUDS ----------#
+
+def load_dill_vars(sn):
+    sn_dict = {}
+    libraries = ["afinn", "bert", "textblob", "vader"]
+    runs = ["run1", "run2", "run3"]
+
+    for lib in libraries:
+        run_dict = {}
+        for run in runs:
+            
+            filename = sn + "_vars/" + sn + "_" + lib + "_" + run
+            with open(filename, 'rb') as f:
+                fmasks = dill.load(f)
+                ldown = dill.load(f)
+                pcr = dill.load(f)
+                pfizer = dill.load(f)
+                quar = dill.load(f)
+                rest = dill.load(f)
+                vac = dill.load(f)
+                time = dill.load(f)
+            run_dict[run] = {"facemasks": fmasks, "lockdown": ldown, "pcr": pcr, \
+                                "pfizer": pfizer, "quarantine": quar, "restrictions": rest,\
+                                "vaccine": vac, "time": time}
+
+        sn_dict[lib] = run_dict
+
+    return sn_dict
+
+#---------- GRAPH TIME TAKEN ----------#
+#def graph_time(times):
