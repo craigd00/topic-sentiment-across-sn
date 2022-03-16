@@ -421,5 +421,9 @@
 ### 16 Mar 2022
 * *1 hour* Gathered the times for the reddit and twitter runs out the dictionaries, through a function made to extract each time and place into pandas dataframe to plot easily
 * *1 hour* Function to graph two subplots, one for reddit and one for twitter time, for comparison in seconds on time taken to run
+* *3 hours* Made code and functions to graph the sentiment of terms compared to the reddit terms per run
+* *2 hours* Graphed the top negative and positive subreddits, one for each library, and for a threshold and just top
+
+
 
 
