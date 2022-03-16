@@ -7,6 +7,7 @@ import csv
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import emoji
 import re
+import pandas as pd
 
 
 def get_top_subreddits(db):
@@ -266,3 +267,41 @@ def bert_preprocess(tweet):
 def reddit_wordcloud_terms(df, sentiment):
     wordcloud_terms = " ".join(post for post in df[df["sentiment"]==sentiment].post.astype(str))
     return wordcloud_terms
+
+
+#---------- GET TOP SUBREDDIT SENTIMENT RESULTS ----------#
+
+def get_subreddit_results(df):
+    negative = df[df["sentiment"] == "negative"]
+    positive = df[df["sentiment"] == "positive"]
+
+    num_of_posts = df.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"]
+    negative_num = negative.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"]
+    positive_num = positive.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"]
+
+    final_df = pd.merge(pd.merge(positive_num, negative_num,on='subreddit'), num_of_posts,on='subreddit').rename(columns={"post_x" : "positive", "post_y": "negative", "post": "total_num"}) 
+
+    final_df["pos_perc"] = final_df["positive"] / final_df["total_num"] * 100
+    final_df["neg_perc"] = final_df["negative"] / final_df["total_num"] * 100
+    return final_df
+
+
+#---------- GRAPH SUBREDDIT SENTIMENTS ----------#
+
+def graph_subreddit(df, sentiment, library, topic, run, filetype):
+
+    colours = {"pos_perc": "green", "neg_perc": "red"}
+    plt.style.use('default') 
+
+    df.reset_index().plot(
+        x="subreddit", y=["pos_perc", "neg_perc"], kind="barh",
+        color=colours
+    )
+    
+    plt.legend(["Positive", "Negative"], loc="upper right")
+    plt.title(library.capitalize() + " Reddit Top " + topic.capitalize() + " " + sentiment + " Subreddits " + run.capitalize(), fontweight='bold')
+    plt.xlabel("Percentage of posts (%)", fontweight='bold')
+    plt.ylabel("Subreddit Name", fontweight='bold')
+    plt.savefig("sentiment_graphs/" + library + "/subreddits/" + filetype + "/" + run + "/" + sentiment + "_" + topic + ".png", bbox_inches='tight')
+    plt.close()
+    plt.rcParams.update({'figure.max_open_warning': 0})

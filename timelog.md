@@ -407,4 +407,23 @@
 * *0.5 hour* Merged develop branch with the twitter and reddit notebooks into main
 * *0.5 hour* Tidied up code, moving graph images into folders and deleting unnecessary notebooks
 
+## Week 10
+
+* Meeting cancelled this week due to supervisors research
+
+### 14 Mar 2022
+* *3 hours* Made wordcloud image code to get back most common words for positive and negative posts for each term for each run
+
+### 15 Mar 2022
+* *1 hour* Started analysis on all sentiment, going to investigate time variable first
+* *2 hours* Made a function to acquire all the variables from dill for each run and term, and place this in a dictionary for easy access to variables
+
+### 16 Mar 2022
+* *1 hour* Gathered the times for the reddit and twitter runs out the dictionaries, through a function made to extract each time and place into pandas dataframe to plot easily
+* *1 hour* Function to graph two subplots, one for reddit and one for twitter time, for comparison in seconds on time taken to run
+* *3 hours* Made code and functions to graph the sentiment of terms compared to the reddit terms per run
+* *2 hours* Graphed the top negative and positive subreddits, one for each library, and for a threshold and just top
+
+
+
 

@@ -12,6 +12,8 @@ from scipy.special import softmax
 import urllib.request
 import csv
 from wordcloud import WordCloud, STOPWORDS
+import dill
+from dill import dump, load
 
 # Variables for BERT model to load
 labels=[]
@@ -179,7 +181,7 @@ def plot_run_sentiment(data_points, filename, title):
     list_of_topics = ['Facemasks', 'Lockdown', 'PCR', 'Pfizer', 'Quarantine', 'Restrictions', 'Vaccine']
     fig = plt.figure()
     x_point = np.arange(7)
-    fig = plt.figure(figsize=(18, 10))
+    fig = plt.figure(figsize=(8, 4))
 
     ax = fig.add_axes([0,0,1,1])
     ax.bar(x_point + 0.00, data_points[0], color = 'g', width = 0.25)
@@ -218,3 +220,124 @@ def wordcloud_image(library, sn, topic, sent, terms):
 
     wordcloud = WordCloud(stopwords=stopwords, max_words=100, background_color="white").generate(terms)
     wordcloud.to_file("wordclouds/" + library + "/" + sn + "/" + topic + "/" + sent + "_wordcloud.png")
+
+
+#---------- RETURN WORD CLOUDS ----------#
+
+def load_dill_vars(sn):
+    sn_dict = {}
+    libraries = ["afinn", "bert", "textblob", "vader"]
+    runs = ["run1", "run2", "run3"]
+
+    for lib in libraries:
+        run_dict = {}
+        for run in runs:
+            
+            filename = sn + "_vars/" + sn + "_" + lib + "_" + run
+            with open(filename, 'rb') as f:
+                fmasks = dill.load(f)
+                ldown = dill.load(f)
+                pcr = dill.load(f)
+                pfizer = dill.load(f)
+                quar = dill.load(f)
+                rest = dill.load(f)
+                vac = dill.load(f)
+                time = dill.load(f)
+            run_dict[run] = {"facemasks": fmasks, "lockdown": ldown, "pcr": pcr, \
+                                "pfizer": pfizer, "quarantine": quar, "restrictions": rest,\
+                                "vaccine": vac, "time": time}
+
+        sn_dict[lib] = run_dict
+
+    return sn_dict
+
+
+#---------- RETURN TIMES ----------#
+def get_times(vars):
+    times_dict = {}
+    for lib in vars:
+        times = []
+
+        for run in vars[lib]:
+            time = vars[lib][run]["time"]
+            times += [-time.total_seconds()]
+
+        times_dict[lib] = times
+
+    return pd.DataFrame(times_dict)
+
+#---------- GRAPH TIME TAKEN ----------#
+def graph_time(twitter_times, reddit_times, filename):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10,5))
+    fig.suptitle('Time taken to run')
+
+    ax1.set_title("Twitter Times")
+    ax1.plot([1,2,3], twitter_times)
+    ax1.set_xticks([1,2,3])
+    ax1.legend(twitter_times)
+    ax1.set_xlabel('Run Number')
+    ax1.set_ylabel('Time to run (s)')
+
+    ax2.set_title("Reddit Times")
+    ax2.plot([1,2,3], reddit_times)
+    ax2.set_xticks([1,2,3])
+    ax2.legend(reddit_times)
+    ax2.set_xlabel('Run Number')
+    ax2.set_ylabel('Time to run (s)')
+
+    plt.subplots_adjust(wspace=0.4)
+    plt.savefig(filename, bbox_inches='tight')
+
+#---------- FOR EACH LIBRARY ----------#
+def get_library_results(twitter_vars, reddit_vars, library):
+    term_and_lib(twitter_vars, reddit_vars, library, "facemasks")
+    term_and_lib(twitter_vars, reddit_vars, library, "lockdown")
+    term_and_lib(twitter_vars, reddit_vars, library, "pcr")
+    term_and_lib(twitter_vars, reddit_vars, library, "pfizer")
+    term_and_lib(twitter_vars, reddit_vars, library, "quarantine")
+    term_and_lib(twitter_vars, reddit_vars, library, "restrictions")
+    term_and_lib(twitter_vars, reddit_vars, library, "vaccine")
+
+#---------- GET INDIVIDUAL TERM DATAPOINTS ----------#
+def term_and_lib(twitter_vars, reddit_vars, lib, topic):
+
+    query_dpts = []
+    positive = []
+    negative = []
+    neutral = []
+
+    for library in twitter_vars:
+        if library != lib:
+            continue
+        for run in twitter_vars[library]:
+            for term in twitter_vars[library][run]:
+                if term != "time" and term == topic:
+                    twitter = positive_neg_count_df(twitter_vars[library][run][term])
+                    reddit = positive_neg_count_df(reddit_vars[library][run][term])
+                    
+                    positive += [twitter['pos_perc'], reddit['pos_perc']]
+                    negative += [twitter['neg_perc'], reddit['neg_perc']]
+                    neutral += [twitter['neu_perc'], reddit['neu_perc']]
+
+    query_dpts += [positive, negative, neutral]
+    
+    graph_comparing_terms(query_dpts, lib, topic)
+    
+
+def graph_comparing_terms(dpts, library, term):
+    list_of_runs = ['Twitter Run1', 'Reddit Run1', 'Twitter Run2', 'Reddit Run2', 'Twitter Run3', 'Reddit Run3']
+    fig = plt.figure()
+    x_point = np.arange(6)
+    fig = plt.figure(figsize=(14, 8))
+
+    ax = fig.add_axes([0,0,1,1])
+    ax.bar(x_point + 0.00, dpts[0], color = 'g', width = 0.25)
+    ax.bar(x_point + 0.25, dpts[1], color = 'r', width = 0.25)
+    ax.bar(x_point + 0.50, dpts[2], color = 'b', width = 0.25)
+    ax.set_ylabel('Percentage of Posts', fontweight='bold', fontsize=16)
+    ax.set_xlabel('Social Network and Run Number', fontweight='bold', fontsize=16)
+    ax.set_title(library.capitalize() + " " + term.capitalize() + " Results", fontweight='bold', fontsize=20)
+        
+    plt.xticks(x_point + 0.25, list_of_runs)
+    ax.legend(labels=['Positive', 'Negative', 'Neutral'])
+    plt.savefig("sentiment_graphs/" + library + "/" + term + ".png", bbox_inches='tight')
