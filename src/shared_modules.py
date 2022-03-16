@@ -251,5 +251,39 @@ def load_dill_vars(sn):
 
     return sn_dict
 
+
+#---------- RETURN TIMES ----------#
+def get_times(vars):
+    times_dict = {}
+    for lib in vars:
+        times = []
+
+        for run in vars[lib]:
+            time = vars[lib][run]["time"]
+            times += [-time.total_seconds()]
+
+        times_dict[lib] = times
+
+    return pd.DataFrame(times_dict)
+
 #---------- GRAPH TIME TAKEN ----------#
-#def graph_time(times):
+def graph_time(twitter_times, reddit_times, filename):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10,5))
+    fig.suptitle('Time taken to run')
+
+    ax1.set_title("Twitter Times")
+    ax1.plot([1,2,3], twitter_times)
+    ax1.set_xticks([1,2,3])
+    ax1.legend(twitter_times)
+    ax1.set_xlabel('Run Number')
+    ax1.set_ylabel('Time to run (s)')
+
+    ax2.set_title("Reddit Times")
+    ax2.plot([1,2,3], reddit_times)
+    ax2.set_xticks([1,2,3])
+    ax2.legend(reddit_times)
+    ax2.set_xlabel('Run Number')
+    ax2.set_ylabel('Time to run (s)')
+
+    plt.subplots_adjust(wspace=0.4)
+    plt.savefig(filename, bbox_inches='tight')
