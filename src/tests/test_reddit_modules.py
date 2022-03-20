@@ -1,9 +1,11 @@
+
 from src.shared_modules import database_as_tweet
 from pytest_mock_resources import create_mongo_fixture
 
 mongo = create_mongo_fixture()
 
 #collection = mongo["SocialMediaPosts"]
+
 def test_reddit_database(mongo):
     collection = mongo["SocialMediaPosts"]
     reddit_data = [
