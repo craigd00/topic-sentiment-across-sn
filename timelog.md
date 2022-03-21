@@ -424,6 +424,12 @@
 * *3 hours* Made code and functions to graph the sentiment of terms compared to the reddit terms per run
 * *2 hours* Graphed the top negative and positive subreddits, one for each library, and for a threshold and just top
 
+### 18 Mar 2022
+* *2 hours* Planned out requirements section of dissertation
+
+### 20 Mar 2022
+* *3 hours* Set up the testing on Github
+* *1 hour* Wrote out requirements section of dissertation
 
 
 
