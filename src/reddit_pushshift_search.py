@@ -7,6 +7,7 @@ import datetime
 
 from reddit_modules import lengthOfComments, splitListIntoStrings
 
+
 client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())
 reddit_db = client.TrainValTestReddit
 reddit_collection = reddit_db['TrainingValidationTest']
