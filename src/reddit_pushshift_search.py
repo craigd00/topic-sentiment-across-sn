@@ -5,6 +5,7 @@ import certifi
 import time
 import datetime
 
+from reddit_modules import lengthOfComments, splitListIntoStrings
 
 client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())
 reddit_db = client.TrainValTestReddit
@@ -93,28 +94,6 @@ def getCommentsFromTitles(post_id):
         runBefore = True
         print("LENGTH OF COMMENTS LIST IS NOW: ", len(reddit_comments))
         time.sleep(1)
-	
-
-def lengthOfComments(comment_ids):
-
-    if len(comment_ids) > 100:
-        comment_list = comment_ids[:100]
-        comment_ids = comment_ids[100:]
-        return comment_list, comment_ids
-    else:
-        comment_list = comment_ids
-        return comment_list, comment_ids
-
-
-def splitListIntoStrings(comment_ids):
-    print(len(comment_ids))
-    comments_strings = ""
-    for id in comment_ids:
-        comments_strings += id
-        if id != comment_ids[-1]:
-            comments_strings += ","
-    
-    return comments_strings
 
 
 searching_reddit(search_type = "submission", filter_by = "title")

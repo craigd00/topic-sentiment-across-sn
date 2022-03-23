@@ -1,6 +1,5 @@
-from src.shared_modules import database_as_tweet, bert_preprocess, process_emoji
-from src.reddit_modules import get_subreddit_results, get_most_popular_results, posts_as_dict
-from src.reddit_pushshift_search import splitListIntoStrings, lengthOfComments
+from src.shared_modules import database_as_tweet
+from src.reddit_modules import get_subreddit_results, get_most_popular_results, posts_as_dict, splitListIntoStrings, lengthOfComments
 
 from pymongo import MongoClient
 import certifi

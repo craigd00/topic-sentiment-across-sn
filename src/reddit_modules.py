@@ -3,6 +3,27 @@ import pandas as pd
 from bson.objectid import ObjectId
 
 
+#---------- FOR REDDIT PUSHSHIFT FILTERING ----------#
+def lengthOfComments(comment_ids):
+
+    if len(comment_ids) > 100:
+        comment_list = comment_ids[:100]
+        comment_ids = comment_ids[100:]
+        return comment_list, comment_ids
+    else:
+        comment_list = comment_ids
+        return comment_list, comment_ids
+
+
+def splitListIntoStrings(comment_ids):
+    print(len(comment_ids))
+    comments_strings = ""
+    for id in comment_ids:
+        comments_strings += id
+        if id != comment_ids[-1]:
+            comments_strings += ","
+    
+    return comments_strings
 #---------- ACQUIRING DATABASE AS DICTIONARY ----------#
 
 def posts_as_dict(db):
