@@ -32,5 +32,4 @@ jobs:
       run: |
         conda install pytest
         conda install pytest-cov
-        pytest tests/ -W ignore::DeprecationWarning
-        pytest --cov tests/
+        pytest --cov tests/ -W ignore::DeprecationWarning
