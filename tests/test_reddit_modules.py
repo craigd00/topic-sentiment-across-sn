@@ -1,6 +1,6 @@
-from src.shared_modules import database_as_tweet, positive_neg_count_df, bert_preprocess, process_emoji
-from src.reddit_modules import get_subreddit_results, get_most_popular_results
-
+from src.shared_modules import database_as_tweet, bert_preprocess, process_emoji
+from src.reddit_modules import get_subreddit_results, get_most_popular_results, posts_as_dict
+from src.reddit_pushshift_search import splitListIntoStrings, lengthOfComments
 
 from pymongo import MongoClient
 import certifi
@@ -9,8 +9,6 @@ import pandas as pd
 CONNECTION_STRING = "mongodb+srv://craig:Dissertation2021-22@socialmediadatasets.aye5g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 def test_reddit_database():
-
-
     client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
 
     database = client.RedditVaccination2
@@ -18,22 +16,6 @@ def test_reddit_database():
     db_return = database_as_tweet(database, "reddit")
 
     assert db_return['subreddit'].iloc[4] == "Anxiety"
-
-
-def test_bert_preprocess():
-    post = "@PiersMorgan https://twitter.com please delete your account"
-
-    processed = bert_preprocess(post)
-   
-    assert processed == " http please delete your account"
-
-
-def test_emoji_regex():
-    post = "Today is a great day😀"
-
-    remove_emoji = process_emoji(post)
-
-    assert remove_emoji == "Today is a great day"
 
 
 def test_subreddit_results():
@@ -62,6 +44,7 @@ def test_subreddit_results():
     assert results["neg_perc"]["covid19"] == 20.0
     assert results["total_num"]["covid19"] == 5
 
+
 def test_most_popular_results():
 
     reddit_data = [
@@ -78,3 +61,34 @@ def test_most_popular_results():
     results = get_most_popular_results(vaccine_df)
 
     assert results.index[0] == "antivaxx"
+
+
+def test_splitting_comment_strings():
+    comment_ids = ["1234", "abcd", "zyxw", "efgh"]
+    result = splitListIntoStrings(comment_ids)
+
+    assert result == "1234,abcd,zyxw,efgh"
+
+
+def test_comment_length():
+    comment_ids = ["1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh",
+               "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh",
+               "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh",
+               "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh",
+               "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh",
+               "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh"]
+
+    com_list, com_ids = lengthOfComments(comment_ids)
+
+    assert len(com_ids) == len(comment_ids) - len(com_list)
+    assert com_ids == ["1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh"]
+
+
+def test_removing_terms_dict():
+    client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
+    database = client.RedditVaccination2
+
+    dictionary = posts_as_dict(database)
+
+    assert dictionary[0]["subreddit"] == "HermanCainAwardMemes"
+    assert dictionary[2]["post"] == "FDA asks for 55 years to complete FOIA request on Pfizer's COVID-19 vaccine"

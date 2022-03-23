@@ -439,5 +439,6 @@
 * *1 hour* Made diagrams for design section of dissertation
 * *1 hour* Planned out what I am going to write for design section
 * *1 hour* Made graphs for most popular subreddits for each term for each run
+* *1 hour* Removed reddit modules that were no longer used and had changed, updated tests
 
 
