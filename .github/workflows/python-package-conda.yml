@@ -31,4 +31,5 @@ jobs:
     - name: Test with pytest
       run: |
         conda install pytest
-        pytest -W ignore::DeprecationWarning
+        pytest tests/ -W ignore::DeprecationWarning
+        pytest --cov=src tests/
