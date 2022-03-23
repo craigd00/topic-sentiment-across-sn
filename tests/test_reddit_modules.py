@@ -7,6 +7,8 @@ import pandas as pd
 
 CONNECTION_STRING = "mongodb+srv://craig:Dissertation2021-22@socialmediadatasets.aye5g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
+#---------- TESTS IF CONNECTS TO DATABASE, AND ITEM MATCHES MONGO DB RESULT ----------#
+
 def test_reddit_database():
     client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
 
@@ -16,6 +18,8 @@ def test_reddit_database():
 
     assert db_return['subreddit'].iloc[4] == "Anxiety"
 
+
+#---------- TESTS IF SUBREDDIT PRODUCES EXPECTED VALUES ----------#
 
 def test_subreddit_results():
 
@@ -44,6 +48,8 @@ def test_subreddit_results():
     assert results["total_num"]["covid19"] == 5
 
 
+#---------- TESTS IF IT RETURNS THE CORRECT TOP SUBREDDIT ----------#
+
 def test_most_popular_results():
 
     reddit_data = [
@@ -62,12 +68,16 @@ def test_most_popular_results():
     assert results.index[0] == "antivaxx"
 
 
+#---------- TESTS IF IT SPLITS THE STRINGS CORRECTLY ----------#
+
 def test_splitting_comment_strings():
     comment_ids = ["1234", "abcd", "zyxw", "efgh"]
     result = splitListIntoStrings(comment_ids)
 
     assert result == "1234,abcd,zyxw,efgh"
 
+
+#---------- TESTS IF IT RETURNS AND SPLITS THE COMMENTS AS EXPECTED ----------#
 
 def test_comment_length():
     comment_ids = ["1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh",
@@ -82,6 +92,8 @@ def test_comment_length():
     assert len(com_ids) == len(comment_ids) - len(com_list)
     assert com_ids == ["1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh", "1234", "abcd", "zyxw", "efgh"]
 
+
+#---------- TESTS IF IT GETS DICTIONARY CORRECTLY ----------#
 
 def test_removing_terms_dict():
     client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())

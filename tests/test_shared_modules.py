@@ -7,6 +7,7 @@ import pandas as pd
 
 CONNECTION_STRING = "mongodb+srv://craig:Dissertation2021-22@socialmediadatasets.aye5g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
+#---------- TESTS IF CONNECTS TO DATABASE, AND ITEM MATCHES MONGO DB RESULT ----------#
 
 def test_twitter_database():
     client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
@@ -16,6 +17,8 @@ def test_twitter_database():
 
     assert db_return['tweet'].iloc[0] == "The coronavirus vaccine programme has continued at pace in Suffolk, with more than 1.6million doses being administered so far. https://t.co/hpKIlidebg"
 
+
+#---------- TESTS IF IT GETS THE RIGHT SENTIMENT AND PERCENTAGE COUNT ----------#
 
 def test_positive_neg_count():
     reddit_data = [
@@ -42,11 +45,15 @@ def test_positive_neg_count():
     assert results["positive"] == 4
 
 
+#---------- TESTS IF VADER PRODUCES CORRECT RESULT ----------#
+
 def test_vader_sentiment():
     post = "excited for my vaccine this afternoon :D"
     result = database_as_vader(post)
     assert result == "positive"
 
+
+#---------- TESTS IF TEXTBLOB PRODUCES CORRECT RESULT ----------#
 
 def test_textblob_sentiment():
     post = "I hate vaccines"
@@ -54,11 +61,15 @@ def test_textblob_sentiment():
     assert result == "negative"
 
 
+#---------- TESTS IF AFINN PRODUCES CORRECT RESULT ----------#
+
 def test_afinn_sentiment():
     post = "i am getting the vaccine tomorrow"
     result = database_as_afinn(post)
     assert result == "neutral"
 
+
+#---------- TESTS IF BERT PRODUCES CORRECT RESULT ----------#
 
 def test_bert_sentiment():
     post = "finally getting my vaccine tomorrow :)"
@@ -66,11 +77,15 @@ def test_bert_sentiment():
     assert result == "positive"
 
 
+#---------- TESTS IF BERT PREPROCESSES AS EXPECTED ----------#
+
 def test_bert_preprocess():
     post = "@PiersMorgan https://twitter.com please delete your account"
     processed = bert_preprocess(post)
     assert processed == " http please delete your account"
 
+
+#---------- TESTS IF EMOJI IS REMOVED CORRECTLY ----------#
 
 def test_emoji_regex():
     post = "Today is a great day😀"

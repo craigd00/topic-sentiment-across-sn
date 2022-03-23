@@ -7,62 +7,62 @@ from twittercredentials import consumer_key, consumer_secret, access_token, acce
 from mongodbcredentials import CONNECTION_STRING, CONNECTION_STRING_JAN_A, CONNECTION_STRING_JAN_1, CONNECTION_STRING_JAN_2, CONNECTION_STRING_TRAINING_DATA
 import datetime
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret )
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret )      # twitter auth credentials
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
-client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())
-twitter_db = client.TrainValTestTwitter
-tweet_collection = twitter_db['TrainingValidationTest']
+client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())        # connects to MongoDB
+twitter_db = client.TrainValTestTwitter     # connects to database
+tweet_collection = twitter_db['TrainingValidationTest']     # database in collection
 
-query = "coronavirus"  #test query at the moment to test
+query = "coronavirus"       #test query at the moment to test
 
-count = 100 # number of tweets to grab in one go
-
-last_id = -1    # used to update last id to gather tweets from different users
-new_tweets = True   # used to go round in loop
-counter = -1    # counter to update times we have gathered data
+num_of_tweets = 100     # number of tweets to retrieve at a time
+last_id = -1        # allows collection of tweets not looked at yet
+tweets = True       # for determining if there is still new tweets coming in
+requests = -1        # tracks how many requests made
 
 storing_tweets = []
 
-while new_tweets:
-        counter+=1 
+while tweets:       # while there is still new tweets
+        requests+=1      # increments requests
 
         try:
-            if(counter < 150):  
-                new_tweets = api.search_tweets(q=query, count=count, lang="en", tweet_mode='extended', max_id=str(last_id - 1))
+            if(requests < 150):      # to respect limit of api
+
+                tweets = api.search_tweets(q=query, count=num_of_tweets, lang="en", tweet_mode='extended', max_id=str(last_id - 1))     # searches for the tweets with query
          
-                if not new_tweets:
+                if not tweets:      # if no more tweets has been retrieved, stops
                     break
           
-                for t in new_tweets:
+                for t in tweets:        # for each new tweet
                    
-                    t = json.dumps(t._json) 
+                    t = json.dumps(t._json)     # gets tweet as json
                     tweet = json.loads(t)
                     
                     retweet = False
 
-                    if tweet['retweeted'] or tweet['full_text'].startswith('RT') == True:
+                    if tweet['retweeted'] or tweet['full_text'].startswith('RT') == True:       # checks if it is a retweet
                         retweet = True
 
-                    if tweet['truncated']:
+                    if tweet['truncated']:      # if truncated, it gets the full text
                         text = tweet['extended_tweet']['full_text']
                     else:
                         text = tweet['full_text']
 
-                    if (retweet == False) and (text not in storing_tweets): #no point adding same text to list, will encourage bot tweets etc
-                        storing_tweets.append(text)
+                    if (retweet == False) and (text not in storing_tweets):     # no point adding exact same text to tweet database
+                        storing_tweets.append(text)     # adds to total list
                         text = {'tweet': text}
                         print(text)
-                        tweet_collection.insert_one(text)
+                        tweet_collection.insert_one(text)       # adds tweet to collection
                      
-                last_id = new_tweets[-1].id
+                last_id = tweets[-1].id
             else:
-                print("15 minute delay")
-                counter = 0
-                time.sleep(15*60) 
-                print(str(datetime.datetime.now()))
+                print("Sleeping for 15 minutes")
+                requests = 0     # resets requests
+                time.sleep(15*60)       # sleeps for 15 minutes
+                print(str(datetime.datetime.now()))     # prints date
                 
         except tweepy.TweepyException as e:
             pass

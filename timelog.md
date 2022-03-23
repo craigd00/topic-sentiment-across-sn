@@ -443,3 +443,4 @@
 * *0.5 hour* Used coverage with pytest
 * *0.5 hour* Removed twitter modules that were never used
 * *1 hour* Finalised pytests
+* *2 hours* Commented code
