@@ -186,27 +186,6 @@ def database_as_textblob(db):
         list_of_dicts += [empty]
     return list_of_dicts
 
-def database_as_flair(db, classifier):
-    list_of_dicts = []
-
-    for entry in db.SocialMediaPosts.find():
-        empty = {}
-        empty['post'] = entry['post']
-        empty['subreddit'] = entry['subreddit']
-
-        text = Sentence(entry['post'])
-        classifier.predict(text)
-        polarity = text.labels[0].value
-
-        if (polarity == "POSITIVE"):
-            empty['sentiment'] = 'positive'
-
-        else:
-            empty['sentiment'] = 'negative'
-
-        list_of_dicts += [empty]
-    return list_of_dicts
-
 
 def database_as_afinn(db, analyzer):
     list_of_dicts = []
@@ -303,5 +282,36 @@ def graph_subreddit(df, sentiment, library, topic, run, filetype):
     plt.xlabel("Percentage of posts (%)", fontweight='bold')
     plt.ylabel("Subreddit Name", fontweight='bold')
     plt.savefig("sentiment_graphs/" + library + "/subreddits/" + filetype + "/" + run + "/" + sentiment + "_" + topic + ".png", bbox_inches='tight')
+    plt.close()
+    plt.rcParams.update({'figure.max_open_warning': 0})
+
+
+#---------- GET MOST POPULAR SUBREDDITS RESULTS ----------#
+
+def get_most_popular_results(df):
+
+    num_of_posts = df.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"].head(10)
+ 
+    return num_of_posts
+
+
+#---------- GRAPH MOST POPULAR SUBREDDITS RESULTS ----------#
+
+def graph_most_popular(df, topic, run):
+
+    df = df.sort_values(ascending=True)
+
+    plt.style.use('default') 
+    df.reset_index().plot(
+        x="subreddit", y="post", kind="barh",
+        color="red", alpha=0.4, edgecolor='red'
+    )
+
+    plt.title("Reddit Top " + topic.capitalize() + " Subreddits " + run.capitalize(), fontweight='bold')
+    plt.xticks(rotation=0)
+    plt.legend(loc="lower right")
+    plt.xlabel("Number of Posts", fontweight='bold')
+    plt.ylabel("Subreddit Name", fontweight='bold')
+    plt.savefig("reddit_graphs/most_popular/" + run + "/" + topic + "_mostpopular.png", bbox_inches='tight')
     plt.close()
     plt.rcParams.update({'figure.max_open_warning': 0})

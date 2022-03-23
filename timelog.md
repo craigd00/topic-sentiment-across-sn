@@ -431,5 +431,13 @@
 * *3 hours* Set up the testing on Github
 * *1 hour* Wrote out requirements section of dissertation
 
+# Week 11
+
+* Meeting cancelled due to supervisors research deadline
+
+### 22 Mar 2022
+* *1 hour* Made diagrams for design section of dissertation
+* *1 hour* Planned out what I am going to write for design section
+* *1 hour* Made graphs for most popular subreddits for each term for each run
 
 
