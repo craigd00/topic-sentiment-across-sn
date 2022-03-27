@@ -228,17 +228,17 @@
 ### 10 Jan 2022
 * *0.5 hour* Ran on lockdown 
 
-### 10 Jan 2022
+### 11 Jan 2022
 * *0.5 hour* Ran on PCR 
 
-### 10 Jan 2022
+### 12 Jan 2022
 * *0.5 hour* Ran on facemasks 
 
-### 11 Jan 2022
+### 13 Jan 2022
 * *0.5 hour* Ran on Pfizer
 * *0.5 hour* Ran on quarantine
 
-### 12 Jan 2022 
+### 14 Jan 2022 
 * *0.5 hour* Computer update had changed IP for MongoDB so had to add current
 * *0.5 hour* Ran on restrictions
 * *0.5 hour* Ran on booster
@@ -444,3 +444,20 @@
 * *0.5 hour* Removed twitter modules that were never used
 * *1 hour* Finalised pytests
 * *2 hours* Commented code
+
+### 23 Mar 2022
+* *2 hours* Wrote out first part of design, tested positive for covid so was not able to work as much as I thought
+
+### 24 Mar 2022
+* *1 hours* Finished writing out design
+
+### 25 Mar 2022
+* *4 hours* Wrote out first half of implementation section
+
+### 26 Mar 2022
+* *4 hours* Wrote out second half of implementation section
+
+### 27 Mar 2022
+* *1 hour* Planned out evaluation section
+* *3 hours* Writing part of evaluation section, adding figures and graphs
+* *0.5 hour* Had to edit codebase as wanted to change part of time graph layout
