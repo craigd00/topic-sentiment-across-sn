@@ -361,3 +361,57 @@ def graph_comparing_terms(dpts, library, term):
     plt.xticks(x_point + 0.25, list_of_runs)        # x-axis is the run names
     ax.legend(labels=['Positive', 'Negative', 'Neutral'])
     plt.savefig("sentiment_graphs/" + library + "/" + term + ".png", bbox_inches='tight')
+
+
+
+#---------- GETS EACH TERM RUN FOR EACH LIBRARY ----------#
+
+def get_specific_run(dill_vars, topic, r, sn):
+    query_dpts = []     # works similar to previous datapoints
+    positive = []
+    negative = []
+    neutral = []
+    
+    for library in dill_vars:       # loops through the libraries
+ 
+        results = positive_neg_count_df(dill_vars[library][r][topic])       # gets data from function
+                        
+                        
+        positive += [results['pos_perc']]    # adds this data to the lists
+        negative += [results['neg_perc']]
+        neutral += [results['neu_perc']]
+
+    query_dpts += [positive, negative, neutral]     # gets datapoints for the library and term
+    graph_comparing_library(query_dpts, topic, sn, r)
+
+
+#---------- LOOPS THROUGH EACH TERM AND RUN ----------#
+
+def run_and_term(dill_vars, sn):
+    for term in dill_vars["afinn"]["run1"]:     # just used as a loop for term names
+        if term != "time":      # makes sure term isnt time
+            for run in dill_vars["afinn"]:      # gets data for each run
+                get_specific_run(dill_vars, term, run, sn)
+
+
+#---------- COMPARES LIBRARY RESULTS FOR TERM SIDE BY SIDE ----------#
+
+def graph_comparing_library(dpts, term, sn, run):
+    list_of_libs = ['Afinn', 'BERT', 'TextBlob', 'VADER']
+    fig = plt.figure()
+    x_point = np.arange(4)
+    fig = plt.figure(figsize=(14, 8))
+
+    ax = fig.add_axes([0,0,1,1])
+    ax.bar(x_point + 0.00, dpts[0], color = 'g', width = 0.25)      # plots positive, negative, neutral
+    ax.bar(x_point + 0.25, dpts[1], color = 'r', width = 0.25)
+    ax.bar(x_point + 0.50, dpts[2], color = 'b', width = 0.25)
+    ax.set_ylabel('Percentage of Posts', fontweight='bold', fontsize=16)
+    ax.set_xlabel('Library', fontweight='bold', fontsize=16)      # Reddit VS Twitter
+    ax.set_title(sn.capitalize() + " " + term.capitalize() + " " + run.capitalize() + " Results", fontweight='bold', fontsize=20)       # title of graph
+        
+    plt.xticks(x_point + 0.25, list_of_libs)        # x-axis is the library names
+    ax.legend(labels=['Positive', 'Negative', 'Neutral'])
+    plt.savefig("sentiment_graphs/lib_comparisons/" + sn + "/" + term + run + ".png", bbox_inches='tight')
+    plt.close()     # saves the image then closes
+    plt.rcParams.update({'figure.max_open_warning': 0})     # to stop warning as there is so many graphs being produced

@@ -461,3 +461,8 @@
 * *1 hour* Planned out evaluation section
 * *3 hours* Writing part of evaluation section, adding figures and graphs
 * *0.5 hour* Had to edit codebase as wanted to change part of time graph layout
+
+### 28 Mar 2022
+* *1 hour* Wrote evaluation about most popular subreddits
+* *1 hour* Wrote parts of evaluation
+* *1 hour* Had to make a new graph function in code as the library ones were hard to compare in latex
