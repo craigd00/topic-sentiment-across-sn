@@ -477,3 +477,4 @@
 * *1 hour* Meeting with supervisor, feedback on diss
 * *2 hours* Evaluated a test dataset for model accuracy to put in diss, made confusion matrices
 * *0.5 hour* Made classification reports on models
+* *1 hour* Had to make new graph to compare overall results

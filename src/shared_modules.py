@@ -415,3 +415,91 @@ def graph_comparing_library(dpts, term, sn, run):
     plt.savefig("sentiment_graphs/lib_comparisons/" + sn + "/" + term + run + ".png", bbox_inches='tight')
     plt.close()     # saves the image then closes
     plt.rcParams.update({'figure.max_open_warning': 0})     # to stop warning as there is so many graphs being produced
+
+
+#---------- GETS ENTIRE LIB RESULTS AS DF ----------#
+
+def library_total(vars, lib):
+    initial_df = pd.DataFrame()
+
+    for library in vars:
+        if library == lib:      # gets result for specific library
+            for run in vars[library]:
+                for topic in vars[library][run]:
+                    if topic != "time":
+                        df = vars[library][run][topic]
+                        positive = df[df["sentiment"]=="positive"].count()["sentiment"]
+                        negative = df[df["sentiment"]=="negative"].count()["sentiment"]
+                        neutral = df[df["sentiment"]=="neutral"].count()["sentiment"]
+                        # topics holds the numerical data for one run to sum all afinn, bert etc results
+                        topics = {"term": [topic], "run": [run], "positive": [positive], "negative": [negative], "neutral": [neutral], "total_num": [df.count()["sentiment"]]}
+
+                        topic_df = pd.DataFrame(topics)     # gets dataframe of topics
+                        topic_df = pd.concat([topic_df, initial_df], ignore_index=True)     # adds this to the current results
+                        initial_df = topic_df
+
+    return topic_df
+
+
+#---------- GETS DATAPOINTS FOR LIBRARY DF ----------#
+
+def library_datapoints(libraries):
+    lib_dpts = []       # datapoints to graph results
+    positive = []
+    negative = []
+    neutral = []
+
+    for df in libraries:
+        positive += [(df["positive"].sum()/df["total_num"].sum())*100]      # sums the total count
+        negative += [(df["negative"].sum()/df["total_num"].sum())*100]
+        neutral += [(df["neutral"].sum()/df["total_num"].sum())*100]
+
+    lib_dpts += [positive, negative, neutral]
+    return lib_dpts
+
+
+#---------- GRAPHS A SUBPLOT OF THE RESULTS ----------#
+
+def graph_totalled_results(afinn_dpts, bert_dpts, tblob_dpts, vader_dpts):
+              
+      x_point = np.arange(2)
+      fig, ax = plt.subplots(2, 2, figsize=(14, 10))        # creates subplots to show comparison of sentiment
+      fig.suptitle("Comparison of the total sentiment", fontweight='bold')
+      
+      ax[0,0].bar(x_point + 0.00, afinn_dpts[0], color = 'g', width = 0.2)      # plots positive, negative, neutral
+      ax[0,0].bar(x_point + 0.2, afinn_dpts[1], color = 'r', width = 0.2)
+      ax[0,0].bar(x_point + 0.4, afinn_dpts[2], color = 'b', width = 0.2)
+      ax[0,0].set_ylabel('Percentage of Posts', fontweight='bold')
+      ax[0,0].set_xlabel('Library', fontweight='bold')      # library names
+      plt.sca(ax[0,0])   
+      plt.xticks((x_point + 0.2), ['Afinn Twitter', 'Afinn Reddit'])        # x-axis is the library names
+      ax[0,0].legend(labels=['Positive', 'Negative', 'Neutral'])
+
+      ax[0,1].bar(x_point + 0.00, bert_dpts[0], color = 'g', width = 0.2)      # plots positive, negative, neutral
+      ax[0,1].bar(x_point + 0.2, bert_dpts[1], color = 'r', width = 0.2)
+      ax[0,1].bar(x_point + 0.4, bert_dpts[2], color = 'b', width = 0.2)
+      ax[0,1].set_ylabel('Percentage of Posts', fontweight='bold')
+      ax[0,1].set_xlabel('Library', fontweight='bold')      # library names
+      plt.sca(ax[0,1]) 
+      plt.xticks(x_point + 0.2, ['BERT Twitter', 'BERT Reddit'])        # x-axis is the library names
+      ax[0,1].legend(labels=['Positive', 'Negative', 'Neutral'])
+
+      ax[1,0].bar(x_point + 0.00, tblob_dpts[0], color = 'g', width = 0.2)      # plots positive, negative, neutral
+      ax[1,0].bar(x_point + 0.2, tblob_dpts[1], color = 'r', width = 0.2)
+      ax[1,0].bar(x_point + 0.4, tblob_dpts[2], color = 'b', width = 0.2)
+      ax[1,0].set_ylabel('Percentage of Posts', fontweight='bold')
+      ax[1,0].set_xlabel('Library', fontweight='bold')      # library names
+      plt.sca(ax[1,0]) 
+      plt.xticks(x_point + 0.2, ['TextBlob Twitter', 'TextBlob Reddit'])        # x-axis is the library names
+      ax[1,0].legend(labels=['Positive', 'Negative', 'Neutral'])
+
+      ax[1,1].bar(x_point + 0.00, vader_dpts[0], color = 'g', width = 0.2)      # plots positive, negative, neutral
+      ax[1,1].bar(x_point + 0.2, vader_dpts[1], color = 'r', width = 0.2)
+      ax[1,1].bar(x_point + 0.4, vader_dpts[2], color = 'b', width = 0.2)
+      ax[1,1].set_ylabel('Percentage of Posts', fontweight='bold')
+      ax[1,1].set_xlabel('Library', fontweight='bold')      # library names
+      plt.sca(ax[1,1]) 
+      plt.xticks(x_point + 0.2, ['VADER Twitter', 'VADER Reddit'])        # x-axis is the library names
+      ax[1,1].legend(labels=['Positive', 'Negative', 'Neutral'])
+      
+      plt.savefig("sentiment_graphs/lib_comparisons/overall.png", bbox_inches='tight')
