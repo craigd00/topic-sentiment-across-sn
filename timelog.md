@@ -478,3 +478,7 @@
 * *2 hours* Evaluated a test dataset for model accuracy to put in diss, made confusion matrices
 * *0.5 hour* Made classification reports on models
 * *1 hour* Had to make new graph to compare overall results
+* *3 hours* Finished evaluation
+
+### 30 Mar 2022
+* *5 hours* Redrafted changes suggested in meeting day before

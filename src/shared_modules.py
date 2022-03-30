@@ -285,6 +285,7 @@ def graph_time(twitter_times, reddit_times, filename):
     ax1.set_title("Twitter Times")
     ax1.plot([1,2,3], twitter_times, '-x')        # plots twitter times for each run
     ax1.set_xticks([1,2,3])
+    ax1.set_xticklabels(["Dataset 1", "Dataset 2", "Dataset 3"])
     ax1.semilogy()
     ax1.legend(twitter_times, loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5))
     ax1.set_xlabel('Run Number')
@@ -293,6 +294,7 @@ def graph_time(twitter_times, reddit_times, filename):
     ax2.set_title("Reddit Times")
     ax2.plot([1,2,3], reddit_times, '-x')     # plots reddit times for each run
     ax2.set_xticks([1,2,3])
+    ax2.set_xticklabels(["Dataset 1", "Dataset 2", "Dataset 3"])
     ax2.semilogy()
     ax2.legend(reddit_times, loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5))
     ax2.set_xlabel('Run Number')
