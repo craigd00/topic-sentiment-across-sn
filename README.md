@@ -3,9 +3,9 @@ An overview of the file structure:
 * `timelog.md` The time log for the project.
 * `plan.md` A week-by-week plan of the project, updated weekly. 
 * `src/` Source code for the project. .gitignore file included.
-        + `cardiffnlp` Holds the twitter-roberta-base-sentiment BERT model after installing libraries
-        + `confusion_matrices` The confusion matrices for each sentiment library analysed against the test set in csv_test_files
-        + `csv_test_files` The vaccine sentiment test set from Kaggle to analyse model performance
++ `cardiffnlp` Holds the twitter-roberta-base-sentiment BERT model after installing libraries
++ `confusion_matrices` The confusion matrices for each sentiment library analysed against the test set in csv_test_files
++ `csv_test_files` The vaccine sentiment test set from Kaggle to analyse model performance
         + `reddit_graphs` Holds the graphs for Reddit runs for each sentiment library for all terms, as well as the graphs for the most popular subreddits for each run
         + `reddit_vars` Dill files for each sentiment run, used to save the sentiment analysis results after run for the library
         + `sentiment_graphs` Graphs for the time taken for each library
@@ -54,4 +54,3 @@ An overview of the file structure:
 
 ## Data
 * To view the data, the graphs can all be viewed within the `src/` directory as described above, with graphs and image data being in `confusion_matrices`, `reddit_graphs`, `sentiment_graphs`, `twitter_graphs` and `wordclouds`. Some graphs are also displayed in the Jupyter notebooks within src, but all of the relevant ones are in the folders described. To view the classification reports of the sentiment analysis libraries against a vaccine sentiment test set, the results are in `evaluation_of_libraries.ipynb`.
-
