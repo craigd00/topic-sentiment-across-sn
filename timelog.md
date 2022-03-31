@@ -483,3 +483,8 @@
 ### 30 Mar 2022
 * *2 hours* Redrafted changes suggested in abstract, intro, background, requirements and design
 * *3 hours* Redrafted changed in implementation
+
+### 31 Mar 2022
+* *3 hours* Edited read me and manual files to provide guidance
+* *1 hour* Supervisor meeting on redraft
+* *2 hours* Removed acknowledgements, added more citations to intro, added non-functional requirements

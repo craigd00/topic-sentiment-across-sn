@@ -69,16 +69,20 @@ def reddit_wordcloud_terms(df, sentiment):
 def get_subreddit_results(df):
     negative = df[df["sentiment"] == "negative"]        # dataframe of the negative posts
     positive = df[df["sentiment"] == "positive"]        # dataframe of the positive posts
+    neutral = df[df["sentiment"] == "neutral"]      # dataframe of the neutral posts
 
     num_of_posts = df.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"]       # gets number of posts from each subreddit
     negative_num = negative.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"]     # number of negative posts from each subreddit
     positive_num = positive.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"]     # number of positive posts from each subreddit
+    neutral_num = neutral.groupby("subreddit").count().sort_values(["post"], ascending=False)["post"]       # number of neutral posts
 
-    # merges the positive and negative dataframes together with their counts
-    final_df = pd.merge(pd.merge(positive_num, negative_num,on='subreddit'), num_of_posts,on='subreddit').rename(columns={"post_x" : "positive", "post_y": "negative", "post": "total_num"}) 
+    final_df = pd.merge(pd.merge(positive_num, negative_num,on='subreddit'), neutral_num,on='subreddit').rename(columns={"post_x" : "positive", "post_y": "negative", "post": "neutral"}) 
+    final_df = pd.merge(final_df, num_of_posts,on='subreddit').rename(columns={"post" : "total_num"})       # merges the pos neg neu counts with the num of posts
 
-    final_df["pos_perc"] = final_df["positive"] / final_df["total_num"] * 100       # calculates percentages of positive and negative posts by total number of posts in subreddit
+    final_df["pos_perc"] = final_df["positive"] / final_df["total_num"] * 100       # calculates percentages of positive neutral and negative posts by total number of posts in subreddit
     final_df["neg_perc"] = final_df["negative"] / final_df["total_num"] * 100
+    final_df["neu_perc"] = final_df["neutral"] / final_df["total_num"] * 100
+
     return final_df
 
 
@@ -130,5 +134,25 @@ def graph_most_popular(df, topic, run):
     plt.xlabel("Number of Posts", fontweight='bold')
     plt.ylabel("Subreddit Name", fontweight='bold')
     plt.savefig("reddit_graphs/most_popular/" + run + "/" + topic + "_mostpopular.png", bbox_inches='tight')        # saves image to folder
+    plt.close()
+    plt.rcParams.update({'figure.max_open_warning': 0})
+
+
+#---------- GRAPH MOST POPULAR SUBREDDITS WITH BREAKDOWN OF SENTIMENT ----------#
+
+def graph_popular_breakdown(df, topic, run, library):
+
+    df = df.sort_values(by="total_num", ascending=False).head(10)    # sorts the values to plot
+    df = df.sort_values(by="total_num", ascending=True)
+    plt.style.use('default') 
+ 
+    df[['positive','negative', 'neutral']].plot(kind='barh', stacked=True,color=["green", "red", "blue"])       # plots stacked bar graph
+
+    plt.title("Reddit Top " + topic.capitalize() + " Subreddits " + run.capitalize(), fontweight='bold')
+    plt.xticks(rotation=0)      # to make x-axis labels flat
+    plt.legend(loc="lower right")
+    plt.xlabel("Number of Posts", fontweight='bold')
+    plt.ylabel("Subreddit Name", fontweight='bold')
+    plt.savefig("reddit_graphs/most_popular/" + run + "/" + library + "/" + topic + "_mostpopular.png", bbox_inches='tight')        # saves image to folder
     plt.close()
     plt.rcParams.update({'figure.max_open_warning': 0})
