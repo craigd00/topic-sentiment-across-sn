@@ -1,5 +1,9 @@
+### Investigating Topic Sentiment Across Social Networks
+This project investigates the sentiment around coronavirus topics facemasks, PCR, Pfizer, lockdown, quarantine, restrictions, and vaccine, to see if misinformation on social media and specific subreddits can be identified. It queries Reddit and Twitter based on these search terms, saves the results to an online database, and then investigates the sentiment difference between them.
+
 An overview of the file structure:
 
+* `github/workflows` The automated build CI for the project.
 * `timelog.md` The time log for the project.
 * `plan.md` A week-by-week plan of the project, updated weekly. 
 * `src/` Source code for the project. .gitignore file included.
