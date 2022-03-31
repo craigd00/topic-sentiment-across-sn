@@ -25,6 +25,7 @@ This code is used to collect datasets of posts and tweets from Reddit and Twitte
 * `reddit_modules.py` Has the specific functions for Reddit analysis and processing
 * `reddit_pushshift_search.py` Runs the data collection for Reddit based on a query, using the Pushshift API
 * `remove_reddit_terms.ipynb` Used to check that no false Reddit posts filtered into the database
+* `requirements.txt` Used to install the packages that the project depends on 
 * `sentiment_analysis.ipynb` Analysis of the comparisons of Twitter and Reddit, times of the libraries, and how sentiment changed over time.
 * `shared_modules.py` Functions that are used in both Twitter and Reddit analysis
 * `twitter_afinn_all.ipynb`, `twitter_bert_all.ipynb`, `twitter_textblob_all.ipynb`, and `twitter_vader_all.ipynb` conduct the sentiment analysis on the Twitter database terms by applying functions in `shared_modules.py` to get the sentiment of tweets.
@@ -33,39 +34,30 @@ This code is used to collect datasets of posts and tweets from Reddit and Twitte
 * `wordcloud_terms.ipynb` Produces wordclouds of the most positive and negative terms associated with positive posts and negative posts for each term
 
 ## Build instructions
-
-**You must** include the instructions necessary to build and deploy this project successfully. If appropriate, also include 
-instructions to run automated tests. 
+To allow the code to run, it is recommended to create a new virtual environment to run this on. This can be achieved by typing the following command on an Anaconda Powershell Prompt
+* `conda create -n environment_name python=3.7.9`
+* `conda activate environment_name`
+To install the packages required to run the project, with requirements.txt being the requirements file from here in your local directory
+* `pip install -r requirements.txt`
+The tests are held in the tests folder. To run these:
+* `pytest --cov tests/ -W ignore::DeprecationWarning`
+* These are held in a folder outwith the `src/` folder, so these may need to be viewed on [GitHub] (https://github.com/craigd00/topic-sentiment-across-sn)
 
 ### Requirements
+The prerequisites for setup of the project are
 
-List the all of the pre-requisites software required to set up your project (e.g. compilers, packages, libraries, OS, hardware)
-
-For example:
-
-* Python 3.7
+* Python 3.7.9
 * Packages: listed in `requirements.txt` 
 * Tested on Windows 10
 
-or another example:
-
-* Requires Raspberry Pi 3 
-* a Linux host machine with the `arm-none-eabi` toolchain (at least version `x.xx`) installed
-* a working LuaJIT installation > 2.1.0
-
 ### Build steps
-
-List the steps required to build software. 
-
-Hopefully something simple like `pip install -e .` or `make` or `cd build; cmake ..`. In
-some cases you may have much more involved setup required.
+* `conda create -n environment_name python=3.7.9`
+* `conda activate environment_name`
+* `pip install -r requirements.txt`
 
 ### Test steps
+Pytest feature testing can be run using the tests in the `tests` directory
 
-List steps needed to show your software works. This might be running a test suite, or just starting the program; but something that could be used to verify your code is working correctly.
+* Run automated tests by running `pytest --cov tests/ -W ignore::DeprecationWarning`
 
-Examples:
-
-* Run automated tests by running `pytest`
-* Start the software by running `bin/editor.exe` and opening the file `examples/example_01.bin`
 
