@@ -134,7 +134,7 @@
 ### 12 Nov 2021
 * *2 hours* Left the code running, it pulled back 3k post titles containing query, 7k comments containing query, and 22k comments from titles containing query. Code did not break and successfully worked
 
-## Week 8
+## Week 9
 
 * Meeting asychronous on teams this week as I had asked all my questions the previous week, and only had one question so was easier to message
 
@@ -150,7 +150,7 @@
 * *1 hour* Ran code again on Boris Johnson as I couldn't change my MongoDB database names on him that I currently had, data from reddit was also over a month
 * *2 hours* Made a python notebook to analyse emotion difference solely using VADER, going to try a NLP approach next week to see if this improves the work, maybe manually classify a small dataset
 
-## Week 9
+## Week 10
 
 * Meeting on Tuesday 2pm
 
@@ -170,7 +170,7 @@
 * *0.5 hour*  Changed query to run for PCR
 * *0.5 hour*  Changed query to run for facemasks
 
-## Week 10
+## Week 11
 
 * Meeting asynchronous this week - Progress stunted a bit this week due to amount of coursework
 
@@ -180,11 +180,11 @@
 ### 30 Nov 2021
 * *0.5 hour* Ran code on restrictions
 
-## Week 11
+## Week 12
 
 * Supervisor had MSc project readings and I had exams and deadlines, so was not able to meet
 
-## Week 12
+## Week 13
 
 * Meeting on Tuesday 14th has been pushed to following week
 
@@ -481,4 +481,5 @@
 * *3 hours* Finished evaluation
 
 ### 30 Mar 2022
-* *5 hours* Redrafted changes suggested in meeting day before
+* *2 hours* Redrafted changes suggested in abstract, intro, background, requirements and design
+* *3 hours* Redrafted changed in implementation

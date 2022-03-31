@@ -146,6 +146,3 @@ vocab.json
 #var files
 twitter_vars/
 reddit_vars/
-
-#CSV potential train and test files
-csv_test_files
