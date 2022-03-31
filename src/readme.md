@@ -41,7 +41,7 @@ To install the packages required to run the project, with requirements.txt being
 * `pip install -r requirements.txt`
 The tests are held in the tests folder. To run these:
 * `pytest --cov tests/ -W ignore::DeprecationWarning`
-* These are held in a folder outwith the `src/` folder, so these may need to be viewed on [GitHub] (https://github.com/craigd00/topic-sentiment-across-sn)
+* These are held in a folder outwith the `src/` folder, so these may need to be viewed on [GitHub](https://github.com/craigd00/topic-sentiment-across-sn)
 
 ### Requirements
 The prerequisites for setup of the project are
