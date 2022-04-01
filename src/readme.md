@@ -60,4 +60,9 @@ Pytest feature testing can be run using the tests in the `tests` directory
 
 * Run automated tests by running `pytest --cov tests/ -W ignore::DeprecationWarning`
 
+### Credentials
+* MongoDB credentials are held within `mongodbcredentials.py`
+* Twitter API credentials are held within `twittercredentials.py`
+* The MongoDB cluster if being run will need to be updated to your IP address. To do this, simply log into [MongoDB](https://account.mongodb.com/account/login) with the details provided in the credentials, and update the database access to your IP
+
 
