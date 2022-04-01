@@ -182,6 +182,12 @@ def shared_subreddits(reddit_vars):
     subreddits_negative = {}        # holds vars for positive and negative subreddit count
     subreddits_positive = {}
 
+    subreddits_pos_p_posts = {}     # pos subredit pos posts
+    subreddits_pos_n_posts = {}     # pos subredit neg posts
+    
+    subreddits_neg_p_posts = {}     # neg subredit pos posts
+    subreddits_neg_n_posts = {}     # neg subredit neg posts
+
     for library in reddit_vars:
         for run in reddit_vars[library]:
             for topic in reddit_vars[library][run]:
@@ -191,39 +197,53 @@ def shared_subreddits(reddit_vars):
                     
                     neg_df = df[df["total_num"] > ratio].sort_values(["neg_perc"], ascending=False).head(10)
                     pos_df = df[df["total_num"] > ratio].sort_values(["pos_perc"], ascending=False).head(10)
-
+                    
                     for index, row in neg_df.iterrows():        # loop adds subreddit to dictionary count each time it apears in top 10
                         if index in subreddits_negative:
                             subreddits_negative[index] += 1
+                            subreddits_neg_p_posts[index] += row["positive"]        # adds positive and negative count if in dictionary
+                            subreddits_neg_n_posts[index] += row["negative"]
+
                         else:
                             subreddits_negative[index] = 1
+                            subreddits_neg_p_posts[index] = row["positive"]     # sets positive and negative count if not in dictionary
+                            subreddits_neg_n_posts[index] = row["negative"]
                     
                     for index, row in pos_df.iterrows():
                         if index in subreddits_positive:
                             subreddits_positive[index] += 1
+                            subreddits_pos_p_posts[index] += row["positive"]
+                            subreddits_pos_n_posts[index] += row["negative"]
                         else:
                             subreddits_positive[index] = 1
+                            subreddits_pos_p_posts[index] = row["positive"]
+                            subreddits_pos_n_posts[index] = row["negative"]
 
     neg_df = pd.DataFrame(list(subreddits_negative.items()), columns=['subreddit', 'count'])        # turns into dataframe for analysis
+    neg_n_df = pd.DataFrame(list(subreddits_neg_n_posts.items()), columns=['subreddit', 'negative'])
+    neg_p_df = pd.DataFrame(list(subreddits_neg_p_posts.items()), columns=['subreddit', 'positive'])
+
     pos_df = pd.DataFrame(list(subreddits_positive.items()), columns=['subreddit', 'count'])
-    return neg_df, pos_df
+    pos_p_df = pd.DataFrame(list(subreddits_pos_p_posts.items()), columns=['subreddit', 'positive'])
+    pos_n_df = pd.DataFrame(list(subreddits_pos_n_posts.items()), columns=['subreddit', 'negative'])
+
+    neg_final = pd.merge(pd.merge(neg_df, neg_p_df,on='subreddit'), neg_n_df,on='subreddit')        # merges positive and negative dfs
+    pos_final = pd.merge(pd.merge(pos_df, pos_p_df,on='subreddit'), pos_n_df,on='subreddit')
+    return neg_final, pos_final
 
 
 #---------- GRAPHS CROSSOVER BETWEEN SUBREDDITS ----------#
 
 def graph_common_subreddits(df, sentiment):
 
-    df = df.sort_values(["count"], ascending=True)     # sorts the values to plot
-
+    df = df.sort_values(by="count", ascending=True)     # sorts the values to plot
+    df = df.set_index('subreddit')
     plt.style.use('default') 
-    df.reset_index().plot(      # plots the most subreddits horizontally with times appeared in count
-        x="subreddit", y="count", kind="barh",
-        color="red", alpha=0.4, edgecolor='red'
-    )
 
+    df[['positive','negative']].plot(kind='barh', stacked=True, alpha=0.4, color=["green", "red"])
     plt.title("Reddit Top Overall " + sentiment.capitalize() + " Subreddits", fontweight='bold')
     plt.xticks(rotation=0)      # to make x-axis labels flat
     plt.legend(loc="lower right")
-    plt.xlabel("Count of times subreddit has appeared in top 10", fontweight='bold')
+    plt.xlabel("Number of positive and negative posts", fontweight='bold')
     plt.ylabel("Subreddit Name", fontweight='bold')
     plt.savefig("reddit_graphs/crossover/" + sentiment + "_mostcommon.png", bbox_inches='tight')        # saves image to folder
