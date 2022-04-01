@@ -13,10 +13,10 @@ api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
 client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())        # connects to MongoDB
-twitter_db = client.TrainValTestTwitter     # connects to database
+twitter_db = client.CoronavirusTwitter     # connects to database
 tweet_collection = twitter_db['TrainingValidationTest']     # database in collection
 
-query = "coronavirus"       #test query at the moment to test
+query = "vaccine"       #test query at the moment to test
 
 num_of_tweets = 100     # number of tweets to retrieve at a time
 last_id = -1        # allows collection of tweets not looked at yet

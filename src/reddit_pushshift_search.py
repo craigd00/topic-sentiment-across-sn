@@ -11,10 +11,10 @@ from reddit_modules import lengthOfComments, splitListIntoStrings
 
 
 client = MongoClient(CONNECTION_STRING_TRAINING_DATA, tlsCAFile=certifi.where())        # connects to the Mongo DB
-reddit_db = client.TrainValTestReddit       # specifies the database to save it into
+reddit_db = client.CoronavirusReddit       # specifies the database to save it into
 reddit_collection = reddit_db['TrainingValidationTest']     # collection name
 
-query = "coronavirus"       # query/term to search for
+query = "vaccine"       # query/term to search for
 
 #https://www.geeksforgeeks.org/how-to-convert-datetime-to-unix-timestamp-in-python/
 
